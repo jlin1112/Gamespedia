@@ -78,7 +78,7 @@ export default function List() {
 
           <Pressable>
             <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
-              Filter
+              Sort
             </Text>
           </Pressable>
         </View>
