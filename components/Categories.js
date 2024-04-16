@@ -30,7 +30,12 @@ const genres = [
   ],
 ];
 
-export default function Categories() {
+export default function Categories({navigation}) {
+
+  const handlePress = (genre) => {
+    navigation.navigate('List', { genre : genre})
+  }
+
   return (
     <>
       <Text style={styles.text}>Explore by Genre</Text>
@@ -55,6 +60,7 @@ export default function Categories() {
                                 { backgroundColor: "rgba(53, 63, 84, .3)" },
                               ]
                         }
+                        onPress={() => handlePress(g)}
                       >
                         <Image source={getImageSource(g.name)} />
                         <Text style={styles.genre}>{g.name}</Text>

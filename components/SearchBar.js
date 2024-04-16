@@ -8,14 +8,46 @@ import {
   Pressable,
   Animated,
 } from "react-native";
+import axios from "axios";
 
-const SearchBar = () => {
-  const [searchText, setSearchText] = useState("");
+const SearchBar = ({ fadeIn, fadeOut, setSearchResult, setSearchingResult, setSearchError }) => {
+  const [searchText, setSearchText] = useState(null);
 
   const searchWidth = useRef(new Animated.Value(1)).current;
 
-  const handleSearch = () => {
-    console.log("search");
+  const handleSearch = async () => {
+    setSearchError(false)
+    setSearchResult(null)
+    setSearchingResult(true)
+    if(!searchText){
+      setSearchingResult(false)
+      return
+    }
+    try {
+      const headers = {
+        "Client-ID": process.env.EXPO_PUBLIC_ClientId,
+        Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
+      };
+      const requestBody = `fields name,cover.url,total_rating,genres.name, first_release_date; where category = 0 & version_parent= null & total_rating != null; search "${searchText}";limit 40;`;
+
+      const response = await axios.post(
+        "https://api.igdb.com/v4/games",
+        requestBody,
+        { headers }
+      )
+      response.data.sort( (a,b) => {
+        return b.total_rating - a.total_rating;
+      } )
+      setTimeout(() => {
+        setSearchingResult(false)
+      },1000)
+     
+      setSearchResult(response.data)
+     
+    } catch (error) {
+      setSearchingResult(false)
+      setSearchError(true)
+    }
   };
 
   const expandSearch = () => {
@@ -34,6 +66,15 @@ const SearchBar = () => {
       duration: 250,
       useNativeDriver: false,
     }).start();
+  };
+
+  const handleFocus = () => {
+    shrinkSearch();
+    fadeOut();
+  };
+  const handleBlur = () => {
+    expandSearch();
+    fadeIn();
   };
 
   return (
@@ -58,8 +99,8 @@ const SearchBar = () => {
             value={searchText}
             onSubmitEditing={handleSearch}
             spellCheck={false}
-            onFocus={shrinkSearch}
-            onBlur={expandSearch}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             blurOnSubmit={true}
           />
         </Animated.View>
@@ -75,14 +116,11 @@ const SearchBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#eee',
-    // padding: 10,
     flex: 1,
     paddingVertical: 16,
     borderColor: "red",
   },
   searchBar: {
-    // flex:1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -93,7 +131,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
-    // paddingHorizontal: 10,
     borderRadius: 10,
     backgroundColor: "#ffffff",
     fontSize: 16,
@@ -111,21 +148,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   animateContainer: {
-    // flex:1,
     flexDirection: "row",
     gap: 16,
-
     overflow: "hidden",
-    // justifyContent:'space-between'
   },
   cancelButton: {
     color: "#ffffff",
     fontSize: 16,
     fontWeight: "700",
     justifyContent: "center",
-    // borderColor:'red',
-    // borderWidth:2,
-    // flex:1,
   },
 });
 

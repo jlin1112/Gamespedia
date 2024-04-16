@@ -1,25 +1,28 @@
-import { useState, useRef } from "react";
 import {
-  View,
-  StyleSheet,
   Text,
-  ScrollView,
-  Image,
-  FlatList,
+  StyleSheet,
+  View,
+  Platform,
+  StatusBar,
   Pressable,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
-import Card from "./Card";
+
+// import { TokenContext } from "../uitils/TokenContext";
+import Card from "../components/Card";
 import { useNavigation } from "@react-navigation/native";
 
-export default function SearchResults({
-  searchResult,
-  setSearchResult,
-  searchingResult,
+export default function Recommend({
+  loadNextGroup,
+  loadingPopular,
+  loadingPopularError,
+  displayData,
 }) {
   const navigation = useNavigation();
+
   return (
-    <>
+    <View style={{ flex: 1 }}>
       <View
         style={{
           flexDirection: "row",
@@ -28,16 +31,30 @@ export default function SearchResults({
           marginBottom: 8,
         }}
       >
-        <Text style={[styles.text, { marginBottom: 8 }]}>Results</Text>
+        <Text style={styles.carouselTitle}>Recommended</Text>
 
-        <Pressable onPress={() => setSearchResult(null)}>
+        <Pressable onPress={loadNextGroup} disabled={loadingPopular}>
           <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
-            Clear
+            Reload
           </Text>
         </Pressable>
       </View>
-
-      {searchingResult ? (
+      {loadingPopularError ? (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(53, 63, 84, .3)",
+            borderRadius: 20,
+            marginTop: 8,
+          }}
+        >
+          <Text style={[styles.text, { textAlign: "center", fontSize: 12 }]}>
+            An error occurred while fetching data. Please try again later.
+          </Text>
+        </View>
+      ) : loadingPopular ? (
         <View
           style={{
             flex: 1,
@@ -50,26 +67,27 @@ export default function SearchResults({
         >
           <ActivityIndicator size="large" />
         </View>
-      ) : searchResult.length > 0 && (
+      ) : (
         <View style={{ flex: 1 }}>
           <FlatList
-            data={searchResult}
+            data={displayData}
             renderItem={({ item }) => {
               return <Card gameData={item} navigation={navigation} />;
             }}
             keyExtractor={(item) => item.id}
-            // showsVerticalScrollIndicator={false}
           />
         </View>
-      )  }
-    </>
+      )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  text: {
+
+  carouselTitle: {
     color: "#ffffff",
     fontSize: 20,
     fontWeight: "700",
-  }
+    // marginTop: 8,
+  },
 });

@@ -22,9 +22,12 @@ export default function WishList({ navigation }) {
     <SafeAreaView style={{ backgroundColor: "#232526", flex: 1 }}>
       <Text style={styles.text}>WishList</Text>
 
-      <View
-        style={{ width: 200, height: 200, backgroundColor: "black" }}
-      ></View>
+      <View style={{height:200, borderColor:'#ffffff',borderWidth:1, flexDirection:'row', justifyContent:'space-between'}}>
+        <View style={{borderColor:'red',borderWidth:1, justifyContent:'center',width:'30%',alignItems:'center'
+      }}><Text>Red</Text></View>
+          <View style={{borderColor:'blue',borderWidth:1,justifyContent:'center',width:'30%',alignItems:'center'
+      }}><Text>Blue</Text></View>
+      </View>
     </SafeAreaView>
   );
 }

@@ -9,7 +9,7 @@ export default function shuffleArray (array)  {
     [array[i], array[j]] = [array[j], array[i]];
   }
 
-  return array.slice(0,15)
+  return array
 };
 
 

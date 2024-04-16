@@ -31,7 +31,7 @@ export default function Home({ navigation }) {
         <Text style={styles.carouselTitle}>Trending</Text>
         <GameCarousel gameData={trendingData} navigation={navigation} />
 
-        <Categories />
+        <Categories navigation={navigation}/>
       </View>
     </SafeAreaView>
   );

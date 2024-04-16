@@ -8,16 +8,26 @@ import {
   ActivityIndicator,
   Pressable,
 } from "react-native";
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  useContext,
+} from "react";
 import Carousel from "react-native-reanimated-carousel";
 import YoutubePlayer from "react-native-youtube-iframe";
 import ScrollIndicator from "../components/ScrollIndicator";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import Pricing from "./Pricing";
+// import { TokenContext } from "../uitils/TokenContext";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function Detail() {
+  // const token = useContext(TokenContext)
+  const navigation = useNavigation();
   const [playing, setPlaying] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -58,10 +68,10 @@ export default function Detail() {
       setScreenLoading(true);
       try {
         const headers = {
-          "Client-ID": `${process.env.ClientId}`,
-          Authorization: `Bearer ${process.env.Bearer}`,
+          "Client-ID": process.env.EXPO_PUBLIC_ClientId,
+          Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
         };
-        const requestBody = `fields id,name,cover.url,first_release_date, game_modes.name,  involved_companies.company.name, rating, screenshots.url,summary,themes.name, videos.video_id;where id = ${IGDB_id};`;
+        const requestBody = `fields id,name,cover.url,first_release_date, game_modes.name,  involved_companies.company.name, rating, screenshots.url,summary,themes.name, videos.video_id,platforms.name;where id = ${IGDB_id};`;
 
         const response = await axios.post(
           "https://api.igdb.com/v4/games",
@@ -70,7 +80,10 @@ export default function Detail() {
         );
 
         setGameData(response.data);
-        setScreenLoading(false);
+        setTimeout(() => {
+          setScreenLoading(false);
+        }, 500);
+        // setScreenLoading(false);
       } catch (error) {
         setScreenLoading(false);
         setScreenError(true);
@@ -210,10 +223,17 @@ export default function Detail() {
                           onError={handleVideoError}
                         />
                       ) : (
-                        <View style={{flex:1,alignItems:'center', justifyContent:'center'}}><Text style={styles.text}>
-                        Video currently unavailable
-                      </Text></View>
-                        
+                        <View
+                          style={{
+                            flex: 1,
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Text style={styles.text}>
+                            Video currently unavailable
+                          </Text>
+                        </View>
                       )}
                     </View>
                   )
@@ -260,6 +280,23 @@ export default function Detail() {
             })}
           </View>
 
+          {gameData[0].platforms && (
+            <View style={{ marginBottom: 16 }}>
+              {/* <Text style={[styles.text, { marginBottom: 8 }]}>
+                Involved Companies:
+              </Text> */}
+              <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
+                {gameData[0].platforms.map((platform, index) => {
+                  return (
+                    <View style={styles.label} key={index}>
+                      <Text style={styles.subtext}>{platform.name}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          )}
+
           {gameData[0].involved_companies && (
             <View style={{ marginBottom: 16 }}>
               <Text style={[styles.text, { marginBottom: 8 }]}>
@@ -305,22 +342,36 @@ export default function Detail() {
             </View>
           )}
 
-          <View style={styles.buttons}>
-            <Pressable
-              style={({ pressed }) =>
-                pressed ? [styles.button, { opacity: 0.8 }] : styles.button
-              }
-            >
-              <Text style={styles.buttonText}>Add to Watchlist</Text>
-            </Pressable>
-            <Pressable
-              style={({ pressed }) =>
-                pressed ? [styles.button, { opacity: 0.8 }] : styles.button
-              }
-            >
-              <Text style={styles.buttonText}>Pricing Details</Text>
-            </Pressable>
-          </View>
+          {/* {gameData && (
+            <View style={{ marginBottom: 16 }}>
+              <Text style={[styles.text, { marginBottom: 8 }]}>PC Pricing:</Text>
+              <View>
+                <Pricing gameName={gameData[0].name} />
+              </View>
+            </View>
+          )} */}
+
+          {gameData && (
+            <View style={styles.buttons}>
+              <Pressable
+                style={({ pressed }) =>
+                  pressed ? [styles.button, { opacity: 0.8 }] : styles.button
+                }
+              >
+                <Text style={styles.buttonText}>Add to Watchlist</Text>
+              </Pressable>
+              <Pressable
+                style={({ pressed }) =>
+                  pressed ? [styles.button, { opacity: 0.8 }] : styles.button
+                }
+                onPress={() =>
+                  navigation.navigate("Editions", { gameName: gameData[0].name })
+                }
+              >
+                <Text style={styles.buttonText}>Pricing Details</Text>
+              </Pressable>
+            </View>
+          )}
         </ScrollView>
       )}
     </View>

@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import ScrollIndicator from "./ScrollIndicator";
 
-export default function GameCarousel({ gameData, navigation, title }) {
+export default function GameCarousel({ gameData, navigation }) {
   const width = Dimensions.get("window").width - 32;
   const height = Dimensions.get("window").height * 0.15;
 
@@ -63,7 +63,7 @@ export default function GameCarousel({ gameData, navigation, title }) {
                                 {genre.name === "Hack and slash/Beat 'em up"
                                   ? "Action"
                                   : genre.name === "Role-playing (RPG)"
-                                  ? "Role-Playing"
+                                  ? "RPG"
                                   : genre.name === "Turn-based strategy (TBS)"
                                   ? "Strategy"
                                   : genre.name}
