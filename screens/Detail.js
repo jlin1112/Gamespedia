@@ -20,6 +20,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import ScrollIndicator from "../components/ScrollIndicator";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import saveGame from "../uitils/saveGame";
 import Pricing from "./Pricing";
 // import { TokenContext } from "../uitils/TokenContext";
 
@@ -36,6 +37,8 @@ export default function Detail() {
   const [gameData, setGameData] = useState(null);
   const [screenLoading, setScreenLoading] = useState(true);
   const [screenError, setScreenError] = useState(false);
+
+  const [onPC, setOnPC] = useState(false);
 
   const displayItems = [];
   {
@@ -80,6 +83,7 @@ export default function Detail() {
         );
 
         setGameData(response.data);
+        setOnPC(response.data[0].platforms.some((item) => item.id === 6));
         setTimeout(() => {
           setScreenLoading(false);
         }, 500);
@@ -282,9 +286,6 @@ export default function Detail() {
 
           {gameData[0].platforms && (
             <View style={{ marginBottom: 16 }}>
-              {/* <Text style={[styles.text, { marginBottom: 8 }]}>
-                Involved Companies:
-              </Text> */}
               <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 8 }}>
                 {gameData[0].platforms.map((platform, index) => {
                   return (
@@ -342,30 +343,34 @@ export default function Detail() {
             </View>
           )}
 
-          {/* {gameData && (
-            <View style={{ marginBottom: 16 }}>
-              <Text style={[styles.text, { marginBottom: 8 }]}>PC Pricing:</Text>
-              <View>
-                <Pricing gameName={gameData[0].name} />
-              </View>
-            </View>
-          )} */}
-
           {gameData && (
             <View style={styles.buttons}>
               <Pressable
                 style={({ pressed }) =>
                   pressed ? [styles.button, { opacity: 0.8 }] : styles.button
                 }
+                onPress={() => {
+                  saveGame({
+                    name: gameData[0].name,
+                    id: gameData[0].id,
+                    url: gameData[0].cover.url.replace(
+                      "t_thumb",
+                      "t_cover_big"
+                    ),
+                  });
+                }}
               >
-                <Text style={styles.buttonText}>Add to Watchlist</Text>
+                <Text style={styles.buttonText}>Add to Library</Text>
               </Pressable>
               <Pressable
                 style={({ pressed }) =>
                   pressed ? [styles.button, { opacity: 0.8 }] : styles.button
                 }
                 onPress={() =>
-                  navigation.navigate("Editions", { gameName: gameData[0].name })
+                  navigation.navigate("Editions", {
+                    gameName: gameData[0].name,
+                    onPC: onPC,
+                  })
                 }
               >
                 <Text style={styles.buttonText}>Pricing Details</Text>

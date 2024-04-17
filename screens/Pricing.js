@@ -157,7 +157,7 @@ export default function Pricing() {
               Detail Pricing Info Not Available.
             </Text>
             <Text style={styles.text}>
-              Currently the App only offers detail pricing info for games that are available in
+              Currently the App only offers detail pricing info for games that are available on
               Steams, Epic, GOG, Green Man Gaming, Origin, and Uplay.
             </Text>
           </View>

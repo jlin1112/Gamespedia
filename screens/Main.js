@@ -2,7 +2,7 @@ import * as React from "react";
 import Home from "./Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Search from "./Search";
-import WishList from "./WishList";
+import Library from './Library'
 import About from "./About";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -45,8 +45,8 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name="WatchList"
-        component={WishList}
+        name="Library"
+        component={Library}
         options={{
           tabBarIcon: ({ size, focused }) => (
             <Ionicons

@@ -28,13 +28,14 @@ const SearchBar = ({ fadeIn, fadeOut, setSearchResult, setSearchingResult, setSe
         "Client-ID": process.env.EXPO_PUBLIC_ClientId,
         Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
       };
-      const requestBody = `fields name,cover.url,total_rating,genres.name, first_release_date; where category = 0 & version_parent= null & total_rating != null; search "${searchText}";limit 40;`;
+      const requestBody = `fields name,cover.url,total_rating,genres.name, first_release_date; where category = (0,8,9) & version_parent= null & total_rating != null; search "${searchText}";limit 40;`;
 
       const response = await axios.post(
         "https://api.igdb.com/v4/games",
         requestBody,
         { headers }
       )
+      
       response.data.sort( (a,b) => {
         return b.total_rating - a.total_rating;
       } )
@@ -102,6 +103,7 @@ const SearchBar = ({ fadeIn, fadeOut, setSearchResult, setSearchingResult, setSe
             onFocus={handleFocus}
             onBlur={handleBlur}
             blurOnSubmit={true}
+            autoCapitalize='words'
           />
         </Animated.View>
         <Animated.View style={[styles.cancelButton]}>
