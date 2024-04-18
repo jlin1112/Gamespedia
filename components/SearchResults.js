@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import Card from "./Card";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useScrollToTop } from "@react-navigation/native";
 
 export default function SearchResults({
   searchResult,
@@ -18,6 +18,11 @@ export default function SearchResults({
   searchingResult,
 }) {
   const navigation = useNavigation();
+  const ref = useRef(null);
+  useScrollToTop(ref);
+
+
+  
   return (
     <>
       <View
@@ -53,6 +58,7 @@ export default function SearchResults({
       ) : searchResult.length > 0 && (
         <View style={{ flex: 1 }}>
           <FlatList
+          ref={ref}
             data={searchResult}
             renderItem={({ item }) => {
               return <Card gameData={item} navigation={navigation} />;

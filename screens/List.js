@@ -20,6 +20,8 @@ export default function List() {
   const route = useRoute();
   const { genre } = route.params;
 
+
+
   const [offset, setOffSet] = useState(0);
 
   const [loading, setLoading] = useState(true);
@@ -99,6 +101,7 @@ export default function List() {
         ) : searchResult.length > 0 ? (
           <View style={{ flex: 1 }}>
             <FlatList
+            
               data={searchResult}
               renderItem={({ item }) => {
                 return <Card gameData={item} navigation={navigation} />;

@@ -8,10 +8,11 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
+import { useRef } from "react";
 
 // import { TokenContext } from "../uitils/TokenContext";
 import Card from "../components/Card";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useScrollToTop } from "@react-navigation/native";
 
 export default function Recommend({
   loadNextGroup,
@@ -20,6 +21,8 @@ export default function Recommend({
   displayData,
 }) {
   const navigation = useNavigation();
+  const ref = useRef(null);
+  useScrollToTop(ref);
 
   return (
     <View style={{ flex: 1 }}>
@@ -70,6 +73,7 @@ export default function Recommend({
       ) : (
         <View style={{ flex: 1 }}>
           <FlatList
+          ref={ref}
             data={displayData}
             renderItem={({ item }) => {
               return <Card gameData={item} navigation={navigation} />;

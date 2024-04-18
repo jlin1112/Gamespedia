@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default async function saveGame(data) {
   try {
     const existingGameDataJSON = await AsyncStorage.getItem("library");
-    const existingGameData = existingGameDataString
+    const existingGameData = existingGameDataJSON
       ? JSON.parse(existingGameDataJSON)
       : [];
 
@@ -11,7 +11,7 @@ export default async function saveGame(data) {
     const newGameData = {
       name: data.name,
       id: data.id,
-      imageUrl: data.url,
+      data: Date.now()
     };
 
     const alreadyExist = existingGameData.some(

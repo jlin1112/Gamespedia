@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Pressable,
+  Vibration,
 } from "react-native";
 import React, {
   useState,
@@ -21,13 +22,13 @@ import ScrollIndicator from "../components/ScrollIndicator";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import saveGame from "../uitils/saveGame";
-import Pricing from "./Pricing";
-// import { TokenContext } from "../uitils/TokenContext";
+import { GameDataContext } from "../uitils/GameDataContext";
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function Detail() {
   // const token = useContext(TokenContext)
+  const { libraryList, setLibraryList } = useContext(GameDataContext);
   const navigation = useNavigation();
   const [playing, setPlaying] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
@@ -40,27 +41,33 @@ export default function Detail() {
 
   const [onPC, setOnPC] = useState(false);
 
-  const displayItems = [];
-  {
-    gameData &&
-      displayItems.push({
+  const [displayItems, setDisplayItems] = useState(null);
+
+  const createDisplayItemsArray = (data) => {
+    const arr = [];
+    data[0].cover &&
+      arr.push({
         type: "image",
-        url: gameData[0].cover.url.replace("t_thumb", "t_cover_big"),
+        url: data[0].cover.url.replace("t_thumb", "t_cover_big"),
       });
-  }
-  {
-    gameData &&
-      gameData[0].screenshots?.map((shot) =>
-        displayItems.push({ type: "image", url: shot.url })
+    data[0].screenshots &&
+      data[0].screenshots.map((shot) =>
+        arr.push({ type: "image", url: shot.url })
       );
-  }
-  {
-    gameData &&
-      gameData[0].videos &&
-      displayItems.push({
+    data[0].videos &&
+      arr.push({
         type: "video",
-        url: gameData[0].videos[0].video_id,
+        url: data[0].videos[0].video_id,
       });
+    console.log(arr);
+    return arr;
+  };
+
+  
+
+  const handleAdding = async(item) => {
+    const newItem = {"data": Date.now(), "name" : item[0].name, "id" : item[0].id}
+    setLibraryList(prev => [...prev, newItem])
   }
 
   const route = useRoute();
@@ -69,6 +76,7 @@ export default function Detail() {
   useEffect(() => {
     async function getData() {
       setScreenLoading(true);
+
       try {
         const headers = {
           "Client-ID": process.env.EXPO_PUBLIC_ClientId,
@@ -83,12 +91,16 @@ export default function Detail() {
         );
 
         setGameData(response.data);
+        const display = createDisplayItemsArray(response.data);
+
+        setDisplayItems(display);
+
         setOnPC(response.data[0].platforms.some((item) => item.id === 6));
         setTimeout(() => {
           setScreenLoading(false);
         }, 500);
-        // setScreenLoading(false);
       } catch (error) {
+        console.log(error);
         setScreenLoading(false);
         setScreenError(true);
       }
@@ -345,23 +357,38 @@ export default function Detail() {
 
           {gameData && (
             <View style={styles.buttons}>
-              <Pressable
-                style={({ pressed }) =>
-                  pressed ? [styles.button, { opacity: 0.8 }] : styles.button
-                }
-                onPress={() => {
-                  saveGame({
-                    name: gameData[0].name,
-                    id: gameData[0].id,
-                    url: gameData[0].cover.url.replace(
-                      "t_thumb",
-                      "t_cover_big"
-                    ),
-                  });
-                }}
-              >
-                <Text style={styles.buttonText}>Add to Library</Text>
-              </Pressable>
+              {libraryList.some((item) => item.id === gameData[0].id) ? (
+                <Pressable
+                  style={({ pressed }) =>
+                    pressed
+                      ? [styles.button2, { opacity: 0.8 }]
+                      : styles.button2
+                  }
+                  onPress={() => {
+                    saveGame({
+                      name: gameData[0].name,
+                      id: gameData[0].id,
+                      url: gameData[0].cover.url.replace(
+                        "t_thumb",
+                        "t_cover_big"
+                      ),
+                    });
+                  }}
+                >
+                  <Text style={styles.buttonText2}>Already in Library</Text>
+                </Pressable>
+              ) : (
+                <Pressable
+                  style={({ pressed }) =>
+                    pressed ? [styles.button, { opacity: 0.8 }] : styles.button
+                  }
+             
+                  onPress={() => handleAdding(gameData)}
+                >
+                  <Text style={styles.buttonText}>Add to Library</Text>
+                </Pressable>
+              )}
+
               <Pressable
                 style={({ pressed }) =>
                   pressed ? [styles.button, { opacity: 0.8 }] : styles.button
@@ -451,8 +478,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderRadius: 6,
   },
+  button2: {
+    borderColor: "#ffffff",
+    borderWidth: 1,
+    backgroundColor: "#232526",
+    borderRadius: 6,
+  },
   buttonText: {
     color: "#232526",
+    padding: 8,
+  },
+  buttonText2: {
+    color: "#ffffff",
     padding: 8,
   },
 });
