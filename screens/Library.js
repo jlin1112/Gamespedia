@@ -53,6 +53,7 @@ export default function Library({ navigation }) {
     try {
       const updatedGameDataJSON = JSON.stringify(updatedGameData);
       await AsyncStorage.setItem("library", updatedGameDataJSON);
+      setLibraryList(prev => prev.filter(p => p.id != deleteItem.id))
       setDeleting(false)
       
     } catch (error) {
@@ -97,7 +98,7 @@ export default function Library({ navigation }) {
             >
               Remove
               <Text style={{ fontSize: 16, fontWeight: "700" }}>
-                {deleteItem?.name}
+                {' '+ deleteItem?.name +' '} 
               </Text>
               from your library?
             </Text>
@@ -117,7 +118,7 @@ export default function Library({ navigation }) {
       </Modal>
 
       <View style={{ paddingHorizontal: 8 }}>
-        <Text style={[styles.text, { marginBottom: 16 }]}>Library</Text>
+        <Text style={[styles.text, { marginBottom: 16 }]}>Collections</Text>
 
         <View>
           {libraryList.length > 0 ? (

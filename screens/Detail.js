@@ -30,11 +30,14 @@ export default function Detail() {
   // const token = useContext(TokenContext)
   const { libraryList, setLibraryList } = useContext(GameDataContext);
   const navigation = useNavigation();
+
+  //states for displaying images and videos
   const [playing, setPlaying] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
   const [loading, setLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
   const [videoError, setVideoError] = useState(false);
+
   const [gameData, setGameData] = useState(null);
   const [screenLoading, setScreenLoading] = useState(true);
   const [screenError, setScreenError] = useState(false);
@@ -59,16 +62,18 @@ export default function Detail() {
         type: "video",
         url: data[0].videos[0].video_id,
       });
-    console.log(arr);
     return arr;
   };
 
-  
-
-  const handleAdding = async(item) => {
-    const newItem = {"data": Date.now(), "name" : item[0].name, "id" : item[0].id}
-    setLibraryList(prev => [...prev, newItem])
-  }
+  const handleAdding = async (item) => {
+    const newItem = { data: Date.now(), name: item[0].name, id: item[0].id };
+    try {
+      saveGame(newItem);
+      setLibraryList((prev) => [...prev, newItem]);
+    } catch (error) {
+      return;
+    }
+  };
 
   const route = useRoute();
   const { IGDB_id } = route.params;
@@ -100,7 +105,6 @@ export default function Detail() {
           setScreenLoading(false);
         }, 500);
       } catch (error) {
-        console.log(error);
         setScreenLoading(false);
         setScreenError(true);
       }
@@ -365,27 +369,19 @@ export default function Detail() {
                       : styles.button2
                   }
                   onPress={() => {
-                    saveGame({
-                      name: gameData[0].name,
-                      id: gameData[0].id,
-                      url: gameData[0].cover.url.replace(
-                        "t_thumb",
-                        "t_cover_big"
-                      ),
-                    });
+                    navigation.navigate("Library");
                   }}
                 >
-                  <Text style={styles.buttonText2}>Already in Library</Text>
+                  <Text style={styles.buttonText2}>Already in Collections</Text>
                 </Pressable>
               ) : (
                 <Pressable
                   style={({ pressed }) =>
                     pressed ? [styles.button, { opacity: 0.8 }] : styles.button
                   }
-             
                   onPress={() => handleAdding(gameData)}
                 >
-                  <Text style={styles.buttonText}>Add to Library</Text>
+                  <Text style={styles.buttonText}>Add to Collections</Text>
                 </Pressable>
               )}
 

@@ -45,7 +45,7 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name="Library"
+        name="Collections"
         component={Library}
         options={{
           tabBarIcon: ({ size, focused }) => (

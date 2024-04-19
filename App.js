@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,12 +8,10 @@ import Detail from "./screens/Detail";
 import Main from "./screens/Main";
 import Search from "./screens/Search";
 import List from "./screens/List";
-import * as SecureStore from "expo-secure-store";
 import axios from "axios";
 import Splash from "./screens/Splash";
 import Pricing from "./screens/Pricing";
 import Editions from "./screens/Editions";
-// import { TokenContext } from "./uitils/TokenContext";
 import {GameDataContext} from './uitils/GameDataContext'
 
 const Stack = createNativeStackNavigator();
@@ -33,7 +31,6 @@ export default function App() {
       
         setLibraryList(existingGameData);
       } catch (error) {
-        console.log(error)
         setLibraryList([]);
       }
     };
