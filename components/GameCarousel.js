@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import Card from "./Card";
 
 import ScrollIndicator from "./ScrollIndicator";
 
 export default function GameCarousel({ gameData, navigation }) {
-  const width = Dimensions.get("window").width - 32;
+  const width = Dimensions.get("window").width - 16;
   const height = Dimensions.get("window").height * 0.15;
 
   const [activeCard, setActiveCard] = useState(0);
@@ -25,54 +25,7 @@ export default function GameCarousel({ gameData, navigation }) {
                 scrollAnimationDuration={300}
                 onSnapToItem={(index) => setActiveCard(index)}
                 renderItem={({ index }) => (
-                  <TouchableOpacity
-                    activeOpacity={1}
-                    style={styles.trendingCard}
-                    key={index}
-                    onPress={() =>
-                      navigation.navigate("Detail", {
-                        IGDB_id: gameData[index].id,
-                      })
-                    }
-                  >
-                    <Image
-                      source={{
-                        uri:
-                          "https:" +
-                            gameData[index].cover.url.replace(
-                              "t_thumb",
-                              "t_cover_big"
-                            ) || "",
-                      }}
-                      style={styles.trendingImage}
-                    />
-
-                    <View style={styles.trendingTextContainer}>
-                      <Text style={styles.trendingText}>
-                        {gameData[index].name || ""}
-                      </Text>
-                      <Text style={styles.trendingText}>
-                        {gameData[index].total_rating?.toFixed(1) + "/100"}
-                      </Text>
-
-                      <View style={styles.themesText}>
-                        {gameData[index].genres &&
-                          gameData[index].genres.map((genre, index) => {
-                            return (
-                              <Text style={styles.themesSubText} key={index}>
-                                {genre.name === "Hack and slash/Beat 'em up"
-                                  ? "Action"
-                                  : genre.name === "Role-playing (RPG)"
-                                  ? "RPG"
-                                  : genre.name === "Turn-based strategy (TBS)"
-                                  ? "Strategy"
-                                  : genre.name}
-                              </Text>
-                            );
-                          })}
-                      </View>
-                    </View>
-                  </TouchableOpacity>
+                  <Card gameData={gameData[index]} navigation={navigation} />
                 )}
               />
             </View>
@@ -86,8 +39,7 @@ export default function GameCarousel({ gameData, navigation }) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "rgba(53, 63, 84, .3)",
-    borderRadius: 20,
+    borderRadius: 12,
     height: Dimensions.get("window").height * 0.15,
     marginTop: 8,
   },
@@ -110,7 +62,9 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   trendingTextContainer: {
-    flexShrink: 1,
+    // flexShrink: 1,
+    textAlign: "left",
+    alignItems: "flex-start",
   },
   trendingText: {
     textAlign: "center",

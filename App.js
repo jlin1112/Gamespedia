@@ -14,12 +14,15 @@ import Pricing from "./screens/Pricing";
 import Editions from "./screens/Editions";
 import {GameDataContext} from './uitils/GameDataContext'
 
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appLoading, setAppLoading] = useState(true)
   
  const [libraryList, setLibraryList] = useState([])
+
 
   useEffect(() => {
     const getLibraryList = async () => {
@@ -34,6 +37,8 @@ export default function App() {
         setLibraryList([]);
       }
     };
+  
+   
     getLibraryList()
   },[])
 

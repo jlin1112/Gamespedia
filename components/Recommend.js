@@ -19,6 +19,7 @@ export default function Recommend({
   loadingPopular,
   loadingPopularError,
   displayData,
+  fetchPopularGames
 }) {
   const navigation = useNavigation();
   const ref = useRef(null);
@@ -51,11 +52,13 @@ export default function Recommend({
             backgroundColor: "rgba(53, 63, 84, .3)",
             borderRadius: 20,
             marginTop: 8,
+            gap:16,
           }}
         >
-          <Text style={[styles.text, { textAlign: "center", fontSize: 12 }]}>
+          <Text style={[styles.text, { textAlign: "center"}]}>
             An error occurred while fetching data. Please try again later.
           </Text>
+          <Pressable onPress={fetchPopularGames} style={styles.button}><Text style={styles.text}>Retry</Text></Pressable>
         </View>
       ) : loadingPopular ? (
         <View
@@ -94,4 +97,12 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     // marginTop: 8,
   },
+  text: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  button:{
+    borderColor:'#ffffff', borderWidth:1, borderRadius:6, padding:8
+  }
 });

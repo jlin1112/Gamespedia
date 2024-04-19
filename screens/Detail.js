@@ -83,17 +83,9 @@ export default function Detail() {
       setScreenLoading(true);
 
       try {
-        const headers = {
-          "Client-ID": process.env.EXPO_PUBLIC_ClientId,
-          Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
-        };
-        const requestBody = `fields id,name,cover.url,first_release_date, game_modes.name,  involved_companies.company.name, rating, screenshots.url,summary,themes.name, videos.video_id,platforms.name;where id = ${IGDB_id};`;
+      
+        const response = await axios.post('http://192.168.1.79:3000/detail',{gameID: IGDB_id  })
 
-        const response = await axios.post(
-          "https://api.igdb.com/v4/games",
-          requestBody,
-          { headers }
-        );
 
         setGameData(response.data);
         const display = createDisplayItemsArray(response.data);

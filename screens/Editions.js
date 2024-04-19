@@ -18,40 +18,21 @@ export default function Editions() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const cleanString = (str) => str.replace(/[\W_]/g, "").toLowerCase();
-
   useEffect(() => {
     const getEdition = async () => {
       setLoading(true);
 
       try {
-        const response = await axios.get(
-          `https://www.cheapshark.com/api/1.0/games?title=${gameName}`
-        );
-
-        const testArr = [];
-        response.data.map((d) =>
-          testArr.push({ name: d.external, gameID: d.gameID })
-        );
-
-        const filteredGames = testArr.filter((game) => {
-          const cleanDataName = cleanString(gameName);
-          const cleanName = cleanString(game.name);
-          const exactName = cleanName.replace(/edition/g, "").trim();
-          return (
-            exactName.startsWith(cleanDataName) &&
-            !cleanName.includes("bundle") &&
-            !cleanName.includes("gog")
-          );
+        const response = await axios.post("http://192.168.1.79:3000/edition", {
+          gameName,
         });
 
-        setEditionList(filteredGames);
+        setEditionList(response.data);
 
         setTimeout(() => {
           setLoading(false);
         }, 500);
       } catch (error) {
-        console.log(error);
         setLoading(false);
         setError(true);
       }

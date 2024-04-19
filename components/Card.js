@@ -33,7 +33,7 @@ export default function Card({ gameData, navigation }) {
       />
 
       <View style={styles.trendingTextContainer}>
-        <Text style={[styles.trendingText,{textAlign:'left'}]}>{gameData.name || ""}</Text>
+        <Text style={[styles.trendingText,{textAlign:'left'}]} numberOfLines={1}>{gameData.name || ""}</Text>
         <Text style={styles.trendingText}>
           {gameData.total_rating && gameData.total_rating.toFixed(1) + "/100" }
         </Text>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: Dimensions.get("window").height * 0.15,
     gap: 16,
-    borderRadius: 20,
+    borderRadius: 12,
     marginBottom: 8,
   },
   trendingImage: {

@@ -24,18 +24,18 @@ export default function Pricing() {
 
   useEffect(() => {
     const getEdition = async () => {
-      const ids = ["1", "25", "7", "3", "8", "13"];
-      const displayList = [];
       try {
-        const pricingData = await axios.get(
-          `https://www.cheapshark.com/api/1.0/games?id=${gameID}`
+        const pricingData = await axios.post(
+          "http://192.168.1.79:3000/pricing",
+          {
+            gameID,
+          }
         );
 
-        setLowestPrice(pricingData.data.cheapestPriceEver["price"]);
-        pricingData.data.deals.map((d) => {
-          ids.includes(d.storeID) && displayList.push(d);
-        });
-        setPriceList(displayList);
+        pricingData.data.cheapestPriceEver &&
+          setLowestPrice(pricingData.data.cheapestPriceEver);
+
+        setPriceList(pricingData.data.displayList);
 
         setTimeout(() => {
           setLoading(false);
@@ -157,8 +157,9 @@ export default function Pricing() {
               Detail Pricing Info Not Available.
             </Text>
             <Text style={styles.text}>
-              Currently the App only offers detail pricing info for games that are available on
-              Steams, Epic, GOG, Green Man Gaming, Origin, and Uplay.
+              Currently the App only offers detail pricing info for games that
+              are available on Steams, Epic, GOG, Green Man Gaming, Origin, and
+              Uplay.
             </Text>
           </View>
         )}

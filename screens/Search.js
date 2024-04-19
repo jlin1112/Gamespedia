@@ -77,35 +77,24 @@ export default function Search({ navigation }) {
     }).start();
   };
 
-  useEffect(() => {
-    async function fetchPopularGames() {
-      setSearchError(false);
-      setLoadingPopular(true);
-      try {
-        const headers = {
-          "Client-ID": process.env.EXPO_PUBLIC_ClientId,
-          Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
-        };
-        const requestBody = `fields name,cover.url,total_rating, first_release_date,themes.name, genres.name; where category = 0 & version_parent= null & total_rating >= 80 ; sort total_rating_count desc;limit 110;`;
-
-        const response = await axios.post(
-          process.env.EXPO_PUBLIC_URL,
-          requestBody,
-          { headers }
-        );
-
-        const popularGameData = response.data;
-
-        const shuffledData = shuffleArray(popularGameData);
-        setData(shuffledData);
-        setDisplayData(shuffledData.slice(0, 15));
-
-        setLoadingPopular(false);
-      } catch (error) {
-        setLoadingPopularError(true);
-        setLoadingPopular(false);
-      }
+  async function fetchPopularGames() {
+    setSearchError(false);
+    setLoadingPopularError(false);
+    setLoadingPopular(true);
+    try {
+      const response = await axios.get("http://192.168.1.79:3000/popular");
+      const popularGameData = response.data;
+      const shuffledData = shuffleArray(popularGameData);
+      setData(shuffledData);
+      setDisplayData(shuffledData.slice(0, 15));
+      setLoadingPopular(false);
+    } catch (error) {
+      setLoadingPopularError(true);
+      setLoadingPopular(false);
     }
+  }
+
+  useEffect(() => {
     fetchPopularGames();
   }, []);
 
@@ -197,6 +186,7 @@ export default function Search({ navigation }) {
                 loadingPopular={loadingPopular}
                 loadingPopularError={loadingPopularError}
                 displayData={displayData}
+                fetchPopularGames={fetchPopularGames}
               />
             )
           )}

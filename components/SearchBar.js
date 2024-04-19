@@ -10,44 +10,41 @@ import {
 } from "react-native";
 import axios from "axios";
 
-const SearchBar = ({ fadeIn, fadeOut, setSearchResult, setSearchingResult, setSearchError }) => {
+const SearchBar = ({
+  fadeIn,
+  fadeOut,
+  setSearchResult,
+  setSearchingResult,
+  setSearchError,
+}) => {
   const [searchText, setSearchText] = useState(null);
 
   const searchWidth = useRef(new Animated.Value(1)).current;
 
   const handleSearch = async () => {
-    setSearchError(false)
-    setSearchResult(null)
-    setSearchingResult(true)
-    if(!searchText){
-      setSearchingResult(false)
-      return
+    setSearchError(false);
+    setSearchResult(null);
+    setSearchingResult(true);
+    if (!searchText) {
+      setSearchingResult(false);
+      return;
     }
     try {
-      const headers = {
-        "Client-ID": process.env.EXPO_PUBLIC_ClientId,
-        Authorization: `Bearer ${process.env.EXPO_PUBLIC_Bearer}`,
-      };
-      const requestBody = `fields name,cover.url,total_rating,genres.name, first_release_date; where category = (0,8,9) & version_parent= null & total_rating != null; search "${searchText}";limit 40;`;
+      const response = await axios.post("http://192.168.1.79:3000/search", {
+        searchItem: searchText,
+      });
 
-      const response = await axios.post(
-        "https://api.igdb.com/v4/games",
-        requestBody,
-        { headers }
-      )
-      
-      response.data.sort( (a,b) => {
+      response.data.sort((a, b) => {
         return b.total_rating - a.total_rating;
-      } )
+      });
       setTimeout(() => {
-        setSearchingResult(false)
-      },1000)
-     
-      setSearchResult(response.data)
-     
+        setSearchingResult(false);
+      }, 500);
+
+      setSearchResult(response.data);
     } catch (error) {
-      setSearchingResult(false)
-      setSearchError(true)
+      setSearchingResult(false);
+      setSearchError(true);
     }
   };
 
@@ -103,7 +100,7 @@ const SearchBar = ({ fadeIn, fadeOut, setSearchResult, setSearchingResult, setSe
             onFocus={handleFocus}
             onBlur={handleBlur}
             blurOnSubmit={true}
-            autoCapitalize='words'
+            autoCapitalize="words"
           />
         </Animated.View>
         <Animated.View style={[styles.cancelButton]}>
