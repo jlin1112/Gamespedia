@@ -23,7 +23,7 @@ export default function Editions() {
       setLoading(true);
 
       try {
-        const response = await axios.post("http://192.168.1.79:3000/edition", {
+        const response = await axios.post(`http://${process.env.EXPO_PUBLIC_API_URL}/edition`, {
           gameName,
         });
 

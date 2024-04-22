@@ -28,13 +28,20 @@ const genres = [
     { name: "Sports", id: 14 },
     { name: "Simulation", id: 13 },
   ],
+  [
+    { name: "Card & Board Game", id: 35 },
+    { name: "Racing", id: 10 },
+  ],
+  [
+    { name: "Point-and-click", id: 2 },
+    { name: "Visual Novel", id: 34 },
+  ],
 ];
 
-export default function Categories({navigation}) {
-
+export default function Categories({ navigation }) {
   const handlePress = (genre) => {
-    navigation.navigate('List', { genre : genre})
-  }
+    navigation.navigate("List", { genre: genre });
+  };
 
   return (
     <>

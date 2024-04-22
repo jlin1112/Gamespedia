@@ -3,8 +3,6 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Platform,
-  StatusBar,
   Image,
   Pressable,
   Dimensions,
@@ -14,7 +12,6 @@ import Categories from "../components/Categories";
 import GameCarousel from "../components/GameCarousel";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import trendingData from "../uitils/trendingData";
 
 export default function Home({ navigation }) {
   const [trendingData, setTrendingData] = useState(null);
@@ -24,8 +21,11 @@ export default function Home({ navigation }) {
   const getTrendingGames = async () => {
     setTrendingError(false);
     setTrendingLoading(true);
+
     try {
-      const response = await axios.get("http://192.168.1.79:3000/trending");
+      const response = await axios.get(
+        `http://${process.env.EXPO_PUBLIC_API_URL}/trending`
+      );
       setTrendingData(response.data);
       setTimeout(() => {
         setTrendingLoading(false);
@@ -55,12 +55,47 @@ export default function Home({ navigation }) {
             <Text style={styles.text}>To your next adventure</Text>
           </View>
         </View>
-        <Text style={styles.carouselTitle}>Trending</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 8,
+          
+          }}
+        >
+          <Text style={styles.carouselTitle}>Trending</Text>
+          <Pressable style={{alignSelf:'flex-end'}} onPress={() => navigation.navigate('Trending')}>
+            <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500",    marginRight:8 }}>
+              More
+            </Text>
+          </Pressable>
+        </View>
 
         {trendingLoading ? (
           <View style={styles.card}>
             <ActivityIndicator size={"large"} />
           </View>
+        ) : trendingError ? (
+          <>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "rgba(53, 63, 84, .3)",
+                borderRadius: 20,
+                paddingVertical: 8,
+                gap: 8,
+              }}
+            >
+              <Text style={[styles.errorText, { textAlign: "center" }]}>
+                An error occurred while fetching data. Please try again later.
+              </Text>
+              <Pressable onPress={getTrendingGames} style={styles.errorButton}>
+                <Text style={styles.errorText}>Retry</Text>
+              </Pressable>
+            </View>
+          </>
         ) : (
           <GameCarousel gameData={trendingData} navigation={navigation} />
         )}
@@ -74,8 +109,6 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    // paddingHorizontal: 16,
     backgroundColor: "#232526",
   },
   wrapper: {
@@ -117,7 +150,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 20,
     fontWeight: "700",
-    marginTop: 8,
+
     // marginBottom: 8,
   },
   card: {
@@ -126,6 +159,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "rgba(53, 63, 84, .3)",
-    marginTop:8,
+    marginTop: 8,
+  },
+  errorText: {
+    color: "#ffffff",
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  errorButton: {
+    borderColor: "#ffffff",
+    borderWidth: 1,
+    borderRadius: 6,
+    padding: 4,
   },
 });

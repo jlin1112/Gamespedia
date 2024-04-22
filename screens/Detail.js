@@ -83,9 +83,9 @@ export default function Detail() {
       setScreenLoading(true);
 
       try {
-      
-        const response = await axios.post('http://192.168.1.79:3000/detail',{gameID: IGDB_id  })
-
+        const response = await axios.post(`http://${process.env.EXPO_PUBLIC_API_URL}/detail`, {
+          gameID: IGDB_id,
+        });
 
         setGameData(response.data);
         const display = createDisplayItemsArray(response.data);
@@ -361,7 +361,7 @@ export default function Detail() {
                       : styles.button2
                   }
                   onPress={() => {
-                    navigation.navigate("Library");
+                    navigation.navigate("Collections");
                   }}
                 >
                   <Text style={styles.buttonText2}>Already in Collections</Text>

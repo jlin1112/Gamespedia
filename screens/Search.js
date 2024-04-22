@@ -82,7 +82,7 @@ export default function Search({ navigation }) {
     setLoadingPopularError(false);
     setLoadingPopular(true);
     try {
-      const response = await axios.get("http://192.168.1.79:3000/popular");
+      const response = await axios.get(`http://${process.env.EXPO_PUBLIC_API_URL}/popular`);
       const popularGameData = response.data;
       const shuffledData = shuffleArray(popularGameData);
       setData(shuffledData);

@@ -15,43 +15,33 @@ import axios from "axios";
 import Card from "../components/Card";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-export default function List() {
+export default function Trending() {
   const navigation = useNavigation();
-  const route = useRoute();
-  const { genre } = route.params;
 
-  const [offset, setOffSet] = useState(0);
-
-  const [loading, setLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
-  const [searching, setSearching] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [gameData, setGameData] = useState([]);
 
   const [error, setError] = useState(false);
 
-  const searchGenre = async () => {
-    setSearching(true);
+  const getTrending = async () => {
     try {
-      const response = await axios.post(
-        `http://${process.env.EXPO_PUBLIC_API_URL}/genre`,
-        { genre: genre.id, offset }
+      const response = await axios.get(
+        `http://${process.env.EXPO_PUBLIC_API_URL}/trendingList`
       );
 
-      setOffSet((prev) => prev + 20);
+      setGameData(response.data);
 
-      setSearchResult([...searchResult, ...response.data]);
-
-      setSearching(false);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     } catch (error) {
       setLoading(false);
-      setSearching(false);
-      // setSearchResult([]);
       setError(true);
     }
   };
 
   useEffect(() => {
-    searchGenre();
+    getTrending();
   }, []);
 
   return (
@@ -65,13 +55,7 @@ export default function List() {
             marginBottom: 8,
           }}
         >
-          <Text style={[styles.text, { marginBottom: 8 }]}>{genre.name}</Text>
-
-          <Pressable>
-            <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
-              Sort
-            </Text>
-          </Pressable>
+          <Text style={[styles.text, { marginBottom: 8 }]}>Trending</Text>
         </View>
 
         {loading ? (
@@ -87,19 +71,14 @@ export default function List() {
           >
             <ActivityIndicator size="large" />
           </View>
-        ) : searchResult.length > 0 ? (
+        ) : gameData.length > 0 ? (
           <View style={{ flex: 1 }}>
             <FlatList
-              data={searchResult}
+              data={gameData}
               renderItem={({ item }) => {
                 return <Card gameData={item} navigation={navigation} />;
               }}
               keyExtractor={(item) => item.id}
-              onEndReached={searchGenre}
-              onEndReachedThreshold={0.1}
-              ListFooterComponent={
-                searching ? <ActivityIndicator size="large" /> : null
-              }
             />
           </View>
         ) : (

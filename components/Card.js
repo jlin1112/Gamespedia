@@ -6,8 +6,9 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import React from "react";
 
-export default function Card({ gameData, navigation }) {
+const Card = React.memo(({ gameData, navigation }) => {
   return (
     <Pressable
       style={({ pressed }) =>
@@ -25,7 +26,6 @@ export default function Card({ gameData, navigation }) {
       <Image
         source={{
           uri:
-          
             "https:" + gameData.cover?.url.replace("t_thumb", "t_cover_big") ||
             "",
         }}
@@ -33,34 +33,42 @@ export default function Card({ gameData, navigation }) {
       />
 
       <View style={styles.trendingTextContainer}>
-        <Text style={[styles.trendingText,{textAlign:'left'}]} numberOfLines={1}>{gameData.name || ""}</Text>
+        <Text
+          style={[styles.trendingText, { textAlign: "left" }]}
+          numberOfLines={1}
+        >
+          {gameData.name || ""}
+        </Text>
         <Text style={styles.trendingText}>
-          {gameData.total_rating && gameData.total_rating.toFixed(1) + "/100" }
+          {gameData.total_rating && gameData.total_rating.toFixed(1) + "/100"}
         </Text>
 
         <View style={styles.themesText}>
           {gameData.genres &&
             gameData.genres.map((genre, index) => {
-              if(index < 3){
+              if (index < 3) {
                 return (
                   <Text style={styles.themesSubText} key={index}>
                     {genre.name === "Hack and slash/Beat 'em up"
                       ? "Action"
                       : genre.name === "Role-playing (RPG)"
                       ? "RPG"
-                      // : genre.name === "Turn-based strategy (TBS)"
-                      // ? "Strategy"
+                      : genre.name === "Turn-based strategy (TBS)"
+                      ? "TBS"
+                      : genre.name === "Real Time Strategy (RTS)"
+                      ? "RTS"
                       : genre.name}
                   </Text>
                 );
               }
-          
             })}
         </View>
       </View>
     </Pressable>
   );
-}
+});
+
+export default Card;
 
 const styles = StyleSheet.create({
   trendingCard: {

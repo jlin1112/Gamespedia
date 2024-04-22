@@ -35,11 +35,11 @@ export default function Recommend({
           marginBottom: 8,
         }}
       >
-        <Text style={styles.carouselTitle}>Recommended</Text>
+        <Text style={styles.carouselTitle}>Recommend</Text>
 
         <Pressable onPress={loadNextGroup} disabled={loadingPopular}>
           <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
-            Reload
+            More
           </Text>
         </Pressable>
       </View>

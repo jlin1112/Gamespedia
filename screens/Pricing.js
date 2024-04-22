@@ -26,7 +26,7 @@ export default function Pricing() {
     const getEdition = async () => {
       try {
         const pricingData = await axios.post(
-          "http://192.168.1.79:3000/pricing",
+          `http://${process.env.EXPO_PUBLIC_API_URL}/pricing`,
           {
             gameID,
           }

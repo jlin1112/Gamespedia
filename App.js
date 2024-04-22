@@ -12,7 +12,9 @@ import axios from "axios";
 import Splash from "./screens/Splash";
 import Pricing from "./screens/Pricing";
 import Editions from "./screens/Editions";
-import {GameDataContext} from './uitils/GameDataContext'
+import {GameDataContext} from './uitils/GameDataContext';
+import Library from "./screens/Library";
+import Trending from "./screens/Trending";
 
 
 
@@ -91,6 +93,24 @@ export default function App() {
                 <Stack.Screen
                 name="Editions"
                 component={Editions}
+                options={{
+                  headerStyle: { backgroundColor: "#232526" },
+                  headerTintColor: "#ffffff",
+                  headerTitle: "",
+                }}
+              ></Stack.Screen>
+                <Stack.Screen
+                name="Collections"
+                component={Library}
+                options={{
+                  headerStyle: { backgroundColor: "#232526" },
+                  headerTintColor: "#ffffff",
+                  headerTitle: "",
+                }}
+              ></Stack.Screen>
+                <Stack.Screen
+                name="Trending"
+                component={Trending}
                 options={{
                   headerStyle: { backgroundColor: "#232526" },
                   headerTintColor: "#ffffff",
