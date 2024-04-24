@@ -124,8 +124,7 @@ export default function Editions() {
             </Text>
             <Text style={styles.text}>
               The app currently provides detailed pricing information only for
-              games available on PC, including stores such as Steam, Epic, GOG,
-              Green Man Gaming, Origin, and Uplay.
+              games available on PC.
             </Text>
           </View>
         )}

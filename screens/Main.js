@@ -59,7 +59,7 @@ export default function Main() {
         }}
       />
       <Tab.Screen
-        name="About"
+        name="Info"
         component={About}
         options={{
           tabBarIcon: ({ size, focused }) => (

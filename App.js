@@ -40,6 +40,12 @@ export default function App() {
     getLibraryList();
   }, []);
 
+  if(appLoading){
+    return (
+      <Splash />
+    )
+  }
+
   return (
     <>
       <StatusBar style="light" />
