@@ -14,12 +14,14 @@ import {
 import axios from "axios";
 import Card from "../components/Card";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import DropdownComponent from "../components/Dropdown";
 
 export default function List() {
   const navigation = useNavigation();
   const route = useRoute();
   const { genre } = route.params;
 
+  const [sortValue, setSortValue] = useState("1");
   const [offset, setOffSet] = useState(0);
 
   const [loading, setLoading] = useState(false);
@@ -29,30 +31,59 @@ export default function List() {
   const [error, setError] = useState(false);
 
   const searchGenre = async () => {
+    setOffSet(0)
+    setLoading(true);
+    setSearching(true);
+
+    try {
+      const response = await axios.post(
+        `http://${process.env.EXPO_PUBLIC_API_URL}/genre`,
+        { genre: genre.id, offset:0, sortValue }
+      );
+
+      setOffSet((prev) => prev + 20);
+
+      setSearchResult((prev) => response.data);
+
+      setSearching(false);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+      setSearching(false);
+      setError(true);
+    }
+  };
+
+  const searchMoreGenre = async () => {
+    // setLoading(true)
+
     setSearching(true);
     try {
       const response = await axios.post(
         `http://${process.env.EXPO_PUBLIC_API_URL}/genre`,
-        { genre: genre.id, offset }
+        { genre: genre.id, offset, sortValue }
       );
 
       setOffSet((prev) => prev + 20);
 
       setSearchResult([...searchResult, ...response.data]);
 
-      setSearching(false);
-      setLoading(false);
+      setTimeout(() => {
+        setSearching(false);
+      }, 1000);
     } catch (error) {
-      setLoading(false);
+      // setLoading(false);
       setSearching(false);
-      // setSearchResult([]);
-      setError(true);
+      // setError(true);
     }
   };
 
   useEffect(() => {
     searchGenre();
-  }, []);
+  }, [sortValue]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -62,16 +93,21 @@ export default function List() {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            marginBottom: 8,
+            marginVertical: 12,
           }}
         >
-          <Text style={[styles.text, { marginBottom: 8 }]}>{genre.name}</Text>
+          <Text style={[styles.text]}>{genre.name}</Text>
 
-          <Pressable>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
-              Sort
+              Sort By
             </Text>
-          </Pressable>
+            <DropdownComponent
+              sortValue={sortValue}
+              setSortValue={setSortValue}
+              loading={loading}
+            />
+          </View>
         </View>
 
         {loading ? (
@@ -95,7 +131,7 @@ export default function List() {
                 return <Card gameData={item} navigation={navigation} />;
               }}
               keyExtractor={(item) => item.id}
-              onEndReached={searchGenre}
+              onEndReached={searchMoreGenre}
               onEndReachedThreshold={0.1}
               ListFooterComponent={
                 searching ? <ActivityIndicator size="large" /> : null

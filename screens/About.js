@@ -1,17 +1,10 @@
 import { SafeAreaView, Text, StyleSheet, Pressable } from "react-native"
 import axios from "axios";
 
+
 export default function About () {
 
-  const handlePress = async() => {
-    try{
-      const response = await axios.get('http://192.168.1.79:3000/')
-      console.log(response.data)
-    } catch(error){
-      console.log(error.message)
-    }
-   
-  }
+  
 
 
     return (
@@ -22,7 +15,7 @@ export default function About () {
       // >
         <SafeAreaView style={{backgroundColor:'#232526', flex:1}}>
         <Text>About</Text>
-        <Pressable onPress={handlePress}><Text>API test</Text></Pressable>
+       
         </SafeAreaView>
         
         // </LinearGradient>

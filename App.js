@@ -12,19 +12,16 @@ import axios from "axios";
 import Splash from "./screens/Splash";
 import Pricing from "./screens/Pricing";
 import Editions from "./screens/Editions";
-import {GameDataContext} from './uitils/GameDataContext';
+import { GameDataContext } from "./uitils/GameDataContext";
 import Library from "./screens/Library";
 import Trending from "./screens/Trending";
-
-
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [appLoading, setAppLoading] = useState(true)
-  
- const [libraryList, setLibraryList] = useState([])
+  const [appLoading, setAppLoading] = useState(true);
 
+  const [libraryList, setLibraryList] = useState([]);
 
   useEffect(() => {
     const getLibraryList = async () => {
@@ -33,99 +30,92 @@ export default function App() {
         const existingGameData = existingGameDataJSON
           ? JSON.parse(existingGameDataJSON)
           : [];
-      
+
         setLibraryList(existingGameData);
       } catch (error) {
         setLibraryList([]);
       }
     };
-  
-   
-    getLibraryList()
-  },[])
 
+    getLibraryList();
+  }, []);
 
-
-
-    return (
-      <>
-        <StatusBar style="light" />
-        <GameDataContext.Provider value={{libraryList, setLibraryList}}>
-          <NavigationContainer style={styles.container}>
-            <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
-              <Stack.Screen
-                name="Main"
-                component={Main}
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="Search"
-                component={Search}
-                options={{ headerShown: false }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="Detail"
-                component={Detail}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="List"
-                component={List}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-              <Stack.Screen
-                name="Pricing"
-                component={Pricing}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-                <Stack.Screen
-                name="Editions"
-                component={Editions}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-                <Stack.Screen
-                name="Collections"
-                component={Library}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-                <Stack.Screen
-                name="Trending"
-                component={Trending}
-                options={{
-                  headerStyle: { backgroundColor: "#232526" },
-                  headerTintColor: "#ffffff",
-                  headerTitle: "",
-                }}
-              ></Stack.Screen>
-            </Stack.Navigator>
-          </NavigationContainer>
-        </GameDataContext.Provider>
-      </>
-    );
-  }
-
-
-
+  return (
+    <>
+      <StatusBar style="light" />
+      <GameDataContext.Provider value={{ libraryList, setLibraryList }}>
+        <NavigationContainer style={styles.container}>
+          <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
+            <Stack.Screen
+              name="Main"
+              component={Main}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Search"
+              component={Search}
+              options={{ headerShown: false }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Detail"
+              component={Detail}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="List"
+              component={List}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Pricing"
+              component={Pricing}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Editions"
+              component={Editions}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Collections"
+              component={Library}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="Trending"
+              component={Trending}
+              options={{
+                headerStyle: { backgroundColor: "#232526" },
+                headerTintColor: "#ffffff",
+                headerTitle: "",
+              }}
+            ></Stack.Screen>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </GameDataContext.Provider>
+    </>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
