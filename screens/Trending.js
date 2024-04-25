@@ -55,7 +55,7 @@ export default function Trending() {
             marginBottom: 8,
           }}
         >
-          <Text style={[styles.text, { marginBottom: 8 }]}>Trending</Text>
+          <Text style={[styles.text]}>Trending</Text>
         </View>
 
         {loading ? (

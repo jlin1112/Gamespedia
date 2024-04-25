@@ -122,10 +122,11 @@ export default function Editions() {
             <Text style={[styles.title, { marginBottom: 6 }]}>
               Pricing Info Not Available.
             </Text>
-            <Text style={styles.text}>
+            {!onPC &&  <Text style={styles.text}>
               The app currently provides detailed pricing information only for
               games available on PC.
-            </Text>
+            </Text>}
+           
           </View>
         )}
       </View>

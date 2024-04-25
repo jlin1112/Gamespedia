@@ -35,6 +35,10 @@ export default function App() {
       } catch (error) {
         setLibraryList([]);
       }
+
+      setTimeout(() => {
+        setAppLoading(false)
+      },2000)
     };
 
     getLibraryList();

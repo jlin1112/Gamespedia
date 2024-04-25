@@ -38,7 +38,11 @@ export default function About() {
           <View >
         <Text style={[styles.text, {paddingLeft:16}]}>&#8226; Data and Access</Text>
         <Text style={[styles.subText,{marginBottom:8, paddingLeft:40}]}>
-          - <Text style={{fontStyle:'italic'}}>Gamespedia</Text> is designed for game exploring. It <Text style={{fontWeight:'700'}}>will not</Text> require <Text style={{fontWeight:'700'}}>ANY</Text> personal information nor system access.
+          - <Text style={{fontStyle:'italic'}}>Gamespedia</Text> is designed for game exploring. It <Text style={{fontWeight:'700'}}>WILL NOT</Text> require <Text style={{fontWeight:'700'}}>ANY</Text> personal information nor system access.
+        </Text>
+        <Text style={[styles.text, {paddingLeft:16}]}>&#8226; Limitation</Text>
+        <Text style={[styles.subText,{marginBottom:8, paddingLeft:40}]}>
+          - Currently <Text style={{fontStyle:'italic'}}>Gamespedia</Text> only provides pricing and edition information for video games that are available on PC, and in limited stores only. 
         </Text>
       </View>
 
