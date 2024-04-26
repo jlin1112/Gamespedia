@@ -7,16 +7,28 @@ import {
   Pressable,
   Dimensions,
   ActivityIndicator,
+  Animated,
 } from "react-native";
 import Categories from "../components/Categories";
 import GameCarousel from "../components/GameCarousel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 export default function Home({ navigation }) {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
   const [trendingData, setTrendingData] = useState(null);
   const [trendingLoading, setTrendingLoading] = useState(false);
   const [trendingError, setTrendingError] = useState(false);
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
 
   const getTrendingGames = async () => {
     setTrendingError(false);
@@ -37,70 +49,90 @@ export default function Home({ navigation }) {
   };
 
   useEffect(() => {
+    fadeIn();
     getTrendingGames();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wrapper}>
-        <View style={styles.header}>
-          <View style={styles.iconWrapper}>
-            <Image
-              source={require("../assets/icons/Gamepedia.png")}
-              style={styles.icon}
-            ></Image>
-          </View>
-          <View style={{ gap: 8 }}>
-            <Text style={styles.text}>Welcome,</Text>
-            <Text style={styles.text}>To your next adventure</Text>
-          </View>
-        </View>
-        <View
+        <Animated.View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 8,
-          
+            flex:1,
+            opacity: fadeAnim,
           }}
         >
-          <Text style={styles.carouselTitle}>Trending</Text>
-          <Pressable style={{alignSelf:'flex-end'}} onPress={() => navigation.navigate('Trending')}>
-            <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500",    marginRight:8 }}>
-              More
-            </Text>
-          </Pressable>
-        </View>
-
-        {trendingLoading ? (
-          <View style={styles.card}>
-            <ActivityIndicator size={"large"} />
-          </View>
-        ) : trendingError ? (
-          <>
-            <View
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(53, 63, 84, .3)",
-                borderRadius: 20,
-                paddingVertical: 8,
-                gap: 8,
-              }}
-            >
-              <Text style={[styles.errorText, { textAlign: "center" }]}>
-                An error occurred while fetching data. Please try again later.
-              </Text>
-              <Pressable onPress={getTrendingGames} style={styles.errorButton}>
-                <Text style={styles.errorText}>Retry</Text>
-              </Pressable>
+          <View style={styles.header}>
+            <View style={styles.iconWrapper}>
+              <Image
+                source={require("../assets/icons/Gamepedia.png")}
+                style={styles.icon}
+              ></Image>
             </View>
-          </>
-        ) : (
-          <GameCarousel gameData={trendingData} navigation={navigation} />
-        )}
+            <View style={{ gap: 8 }}>
+              <Text style={styles.text}>Welcome,</Text>
+              <Text style={styles.text}>To your next adventure</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: 8,
+            }}
+          >
+            <Text style={styles.carouselTitle}>Trending</Text>
+            <Pressable
+              style={{ alignSelf: "flex-end" }}
+              onPress={() => navigation.navigate("Trending")}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  fontSize: 12,
+                  fontWeight: "500",
+                  marginRight: 8,
+                }}
+              >
+                More
+              </Text>
+            </Pressable>
+          </View>
 
-        <Categories navigation={navigation} />
+          {trendingLoading ? (
+            <View style={styles.card}>
+              <ActivityIndicator size={"large"} />
+            </View>
+          ) : trendingError ? (
+            <>
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "rgba(53, 63, 84, .3)",
+                  borderRadius: 20,
+                  paddingVertical: 8,
+                  gap: 8,
+                }}
+              >
+                <Text style={[styles.errorText, { textAlign: "center" }]}>
+                  An error occurred while fetching data. Please try again later.
+                </Text>
+                <Pressable
+                  onPress={getTrendingGames}
+                  style={styles.errorButton}
+                >
+                  <Text style={styles.errorText}>Retry</Text>
+                </Pressable>
+              </View>
+            </>
+          ) : (
+            <GameCarousel gameData={trendingData} navigation={navigation} />
+          )}
+
+          <Categories navigation={navigation} />
+        </Animated.View>
       </View>
     </SafeAreaView>
   );
