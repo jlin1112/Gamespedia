@@ -83,7 +83,7 @@ export default function Detail() {
       setScreenLoading(true);
 
       try {
-        const response = await axios.post(`http://${process.env.EXPO_PUBLIC_API_URL}/detail`, {
+        const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/detail`, {
           gameID: IGDB_id,
         });
 

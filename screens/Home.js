@@ -36,7 +36,7 @@ export default function Home({ navigation }) {
 
     try {
       const response = await axios.get(
-        `http://${process.env.EXPO_PUBLIC_API_URL}/trending`
+        `${process.env.EXPO_PUBLIC_API_URL}/trending`
       );
       setTrendingData(response.data);
       setTimeout(() => {

@@ -37,7 +37,7 @@ export default function List() {
 
     try {
       const response = await axios.post(
-        `http://${process.env.EXPO_PUBLIC_API_URL}/genre`,
+        `${process.env.EXPO_PUBLIC_API_URL}/genre`,
         { genre: genre.id, offset:0, sortValue }
       );
 

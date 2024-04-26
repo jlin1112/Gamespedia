@@ -26,7 +26,7 @@ export default function Trending() {
   const getTrending = async () => {
     try {
       const response = await axios.get(
-        `http://${process.env.EXPO_PUBLIC_API_URL}/trendingList`
+        `${process.env.EXPO_PUBLIC_API_URL}/trendingList`
       );
 
       setGameData(response.data);
