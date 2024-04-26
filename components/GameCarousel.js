@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, StyleSheet, View, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import Card from "./Card";
 
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   trendingCard: {
-    // flex: 1,
     flexDirection: "row",
     height: "100%",
     gap: 16,
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   trendingTextContainer: {
-    // flexShrink: 1,
     textAlign: "left",
     alignItems: "flex-start",
   },
@@ -71,14 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     color: "#ffffff",
-    //  alignSelf:'center'
     marginTop: 8,
-    // flexWrap:'wrap',
   },
   themesText: {
     flexDirection: "row",
     justifyContent: "center",
-    // flexShrink:1,
     flexWrap: "wrap",
     gap: 6,
   },
@@ -87,9 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "700",
     color: "#ffffff",
-    //  alignSelf:'center'
     marginTop: 8,
-    // flexWrap:'wrap',
     borderColor: "#ffffff",
     borderWidth: 1,
     borderRadius: 6,

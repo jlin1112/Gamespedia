@@ -23,9 +23,12 @@ export default function Editions() {
       setLoading(true);
 
       try {
-        const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/edition`, {
-          gameName,
-        });
+        const response = await axios.post(
+          `https://gamespedia.vercel.app/edition`,
+          {
+            gameName,
+          }
+        );
 
         setEditionList(response.data);
 
@@ -122,11 +125,12 @@ export default function Editions() {
             <Text style={[styles.title, { marginBottom: 6 }]}>
               Pricing Info Not Available.
             </Text>
-            {!onPC &&  <Text style={styles.text}>
-              The app currently provides detailed pricing information only for
-              games available on PC.
-            </Text>}
-           
+            {!onPC && (
+              <Text style={styles.text}>
+                The app currently provides detailed pricing information only for
+                games available on PC.
+              </Text>
+            )}
           </View>
         )}
       </View>

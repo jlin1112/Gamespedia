@@ -1,12 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  ScrollView,
-  Image,
   FlatList,
-  Pressable,
   ActivityIndicator,
   SafeAreaView,
   Platform,
@@ -26,7 +23,7 @@ export default function Trending() {
   const getTrending = async () => {
     try {
       const response = await axios.get(
-        `${process.env.EXPO_PUBLIC_API_URL}/trendingList`
+        `https://gamespedia.vercel.app/trendingList`
       );
 
       setGameData(response.data);

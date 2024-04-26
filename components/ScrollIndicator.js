@@ -1,14 +1,11 @@
 import { StyleSheet, View } from "react-native";
 
-// const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
 export default function ScrollIndicator({ index, length }) {
   const arr = [];
-  
-  for(let i=0;i<length;i++){
-        arr.push(i)
+
+  for (let i = 0; i < length; i++) {
+    arr.push(i);
   }
- 
 
   return (
     <View style={styles.container}>
@@ -24,8 +21,6 @@ export default function ScrollIndicator({ index, length }) {
           ></View>
         );
       })}
-
-    
     </View>
   );
 }

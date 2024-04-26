@@ -6,23 +6,18 @@ import {
   Platform,
   StatusBar,
   Pressable,
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
   Animated,
 } from "react-native";
-import { useContext, useRef } from "react";
+import {  useRef } from "react";
 import SearchBar from "../components/SearchBar";
 import SearchResults from "../components/SearchResults";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import shuffleArray from "../uitils/shuffleArray";
-// import { TokenContext } from "../uitils/TokenContext";
-import Card from "../components/Card";
 import Recommend from "../components/Recommend";
 
-export default function Search({ navigation }) {
-  // const token = useContext(TokenContext);
+export default function Search() {
+  
 
   //whole data and data to be displayed
   const [data, setData] = useState(null);
@@ -63,7 +58,7 @@ export default function Search({ navigation }) {
     setSearching(false);
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200, // Adjust duration as needed
+      duration: 200, 
       useNativeDriver: true,
     }).start();
   };
@@ -72,7 +67,7 @@ export default function Search({ navigation }) {
     setSearching(true);
     Animated.timing(fadeAnim, {
       toValue: 0,
-      duration: 200, // Adjust duration as needed
+      duration: 200,
       useNativeDriver: true,
     }).start();
   };
@@ -82,7 +77,7 @@ export default function Search({ navigation }) {
     setLoadingPopularError(false);
     setLoadingPopular(true);
     try {
-      const response = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/popular`);
+      const response = await axios.get(`https://gamespedia.vercel.app/popular`);
       const popularGameData = response.data;
       const shuffledData = shuffleArray(popularGameData);
       setData(shuffledData);
@@ -235,7 +230,6 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 20,
     fontWeight: "700",
-    // marginTop: 8,
   },
   subText: {
     color: "#ffffff",

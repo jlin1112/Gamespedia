@@ -1,14 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Animated,
-  Pressable,
-} from "react-native";
-import axios from "axios";
-// import { TokenContext } from "./uitils/TokenContext";
+import { useEffect, useRef } from "react";
+import { View, Text, StyleSheet, Image, Animated } from "react-native";
 
 export default function Splash() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -16,7 +7,6 @@ export default function Splash() {
   const translateY = useRef(new Animated.Value(100)).current;
 
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 1000,

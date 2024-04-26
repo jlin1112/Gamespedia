@@ -1,10 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  ScrollView,
-  Image,
   FlatList,
   Pressable,
   ActivityIndicator,
@@ -31,15 +29,16 @@ export default function List() {
   const [error, setError] = useState(false);
 
   const searchGenre = async () => {
-    setOffSet(0)
+    setOffSet(0);
     setLoading(true);
     setSearching(true);
 
     try {
-      const response = await axios.post(
-        `${process.env.EXPO_PUBLIC_API_URL}/genre`,
-        { genre: genre.id, offset:0, sortValue }
-      );
+      const response = await axios.post(`https://gamespedia.vercel.app/genre`, {
+        genre: genre.id,
+        offset: 0,
+        sortValue,
+      });
 
       setOffSet((prev) => prev + 20);
 
@@ -58,8 +57,6 @@ export default function List() {
   };
 
   const searchMoreGenre = async () => {
-    // setLoading(true)
-
     setSearching(true);
     try {
       const response = await axios.post(
@@ -75,9 +72,7 @@ export default function List() {
         setSearching(false);
       }, 1000);
     } catch (error) {
-      // setLoading(false);
       setSearching(false);
-      // setError(true);
     }
   };
 
@@ -165,7 +160,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    // paddingHorizontal: 16,
     flexDirection: "column",
     backgroundColor: "#232526",
     paddingHorizontal: 8,

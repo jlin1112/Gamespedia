@@ -1,4 +1,3 @@
-import * as React from "react";
 import Home from "./Home";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Search from "./Search";

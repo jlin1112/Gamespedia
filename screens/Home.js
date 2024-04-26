@@ -22,7 +22,6 @@ export default function Home({ navigation }) {
   const [trendingError, setTrendingError] = useState(false);
 
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 500,
@@ -36,7 +35,7 @@ export default function Home({ navigation }) {
 
     try {
       const response = await axios.get(
-        `${process.env.EXPO_PUBLIC_API_URL}/trending`
+        `https://gamespedia.vercel.app/trending`
       );
       setTrendingData(response.data);
       setTimeout(() => {
@@ -58,7 +57,7 @@ export default function Home({ navigation }) {
       <View style={styles.wrapper}>
         <Animated.View
           style={{
-            flex:1,
+            flex: 1,
             opacity: fadeAnim,
           }}
         >

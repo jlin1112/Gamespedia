@@ -26,7 +26,7 @@ export default function Pricing() {
     const getEdition = async () => {
       try {
         const pricingData = await axios.post(
-          `${process.env.EXPO_PUBLIC_API_URL}/pricing`,
+          `https://gamespedia.vercel.app/pricing`,
           {
             gameID,
           }

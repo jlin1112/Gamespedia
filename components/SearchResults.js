@@ -1,10 +1,8 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  ScrollView,
-  Image,
   FlatList,
   Pressable,
   ActivityIndicator,
@@ -21,8 +19,6 @@ export default function SearchResults({
   const ref = useRef(null);
   useScrollToTop(ref);
 
-
-  
   return (
     <>
       <View
@@ -55,19 +51,20 @@ export default function SearchResults({
         >
           <ActivityIndicator size="large" />
         </View>
-      ) : searchResult.length > 0 && (
-        <View style={{ flex: 1 }}>
-          <FlatList
-          ref={ref}
-            data={searchResult}
-            renderItem={({ item }) => {
-              return <Card gameData={item} navigation={navigation} />;
-            }}
-            keyExtractor={(item) => item.id}
-            // showsVerticalScrollIndicator={false}
-          />
-        </View>
-      )  }
+      ) : (
+        searchResult.length > 0 && (
+          <View style={{ flex: 1 }}>
+            <FlatList
+              ref={ref}
+              data={searchResult}
+              renderItem={({ item }) => {
+                return <Card gameData={item} navigation={navigation} />;
+              }}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+        )
+      )}
     </>
   );
 }
@@ -77,5 +74,5 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 20,
     fontWeight: "700",
-  }
+  },
 });

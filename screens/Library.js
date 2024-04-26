@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, useContext } from "react";
+import { useState, useCallback, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -16,10 +16,10 @@ import { useFocusEffect } from "@react-navigation/native";
 import { GameDataContext } from "../uitils/GameDataContext";
 
 export default function Library({ navigation }) {
-  const {libraryList, setLibraryList} = useContext(GameDataContext)
+  const { libraryList, setLibraryList } = useContext(GameDataContext);
   const [items, setItems] = useState([]);
   const [deleteItem, setDeleteItem] = useState(null);
-  const [deleting, setDeleting] = useState(false)
+  const [deleting, setDeleting] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -47,24 +47,20 @@ export default function Library({ navigation }) {
   };
 
   const handleDelete = async () => {
-    setDeleting(true)
+    setDeleting(true);
     const updatedGameData = items.filter((item) => item.id != deleteItem.id);
     setItems(updatedGameData);
     try {
       const updatedGameDataJSON = JSON.stringify(updatedGameData);
       await AsyncStorage.setItem("library", updatedGameDataJSON);
-      setLibraryList(prev => prev.filter(p => p.id != deleteItem.id))
-      setDeleting(false)
-      
+      setLibraryList((prev) => prev.filter((p) => p.id != deleteItem.id));
+      setDeleting(false);
     } catch (error) {
-     setDeleting(false)
+      setDeleting(false);
       return;
     }
     setModalVisible(false);
   };
-
-
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -85,35 +81,38 @@ export default function Library({ navigation }) {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
           }}
         >
-          {deleting? <ActivityIndicator /> :  <View
-            style={{
-              backgroundColor: "#ffffff",
-              padding: 20,
-              borderRadius: 10,
-              marginHorizontal: 8,
-            }}
-          >
-            <Text
-              style={{ marginBottom: 16, textAlign: "center", fontSize: 16 }}
-            >
-              Remove
-              <Text style={{ fontSize: 16, fontWeight: "700" }}>
-                {' '+ deleteItem?.name +' '} 
-              </Text>
-              from your library?
-            </Text>
+          {deleting ? (
+            <ActivityIndicator />
+          ) : (
             <View
-              style={{ flexDirection: "row", justifyContent: "space-around" }}
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 20,
+                borderRadius: 10,
+                marginHorizontal: 8,
+              }}
             >
-              <Pressable onPress={() => setModalVisible(false)}>
-                <Text>Close</Text>
-              </Pressable>
-              <Pressable onPress={handleDelete}>
-                <Text style={{ color: "#FF033E" }}>Remove</Text>
-              </Pressable>
+              <Text
+                style={{ marginBottom: 16, textAlign: "center", fontSize: 16 }}
+              >
+                Remove
+                <Text style={{ fontSize: 16, fontWeight: "700" }}>
+                  {" " + deleteItem?.name + " "}
+                </Text>
+                from your library?
+              </Text>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-around" }}
+              >
+                <Pressable onPress={() => setModalVisible(false)}>
+                  <Text>Close</Text>
+                </Pressable>
+                <Pressable onPress={handleDelete}>
+                  <Text style={{ color: "#FF033E" }}>Remove</Text>
+                </Pressable>
+              </View>
             </View>
-          </View>}
-         
+          )}
         </View>
       </Modal>
 
@@ -159,7 +158,6 @@ export default function Library({ navigation }) {
                 );
               }}
               keyExtractor={(item) => item.id}
-              // showsVerticalScrollIndicator={false}
             />
           ) : (
             <Text style={styles.text}>No Games Yet</Text>
@@ -174,7 +172,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    // paddingHorizontal: 16,
     flexDirection: "column",
     backgroundColor: "#232526",
   },
@@ -187,7 +184,6 @@ const styles = StyleSheet.create({
   trendingCard: {
     backgroundColor: "rgba(53, 63, 84, .3)",
     flexDirection: "row",
-    // height: Dimensions.get("window").height * 0.15,
     gap: 16,
     borderRadius: 20,
     marginBottom: 8,
@@ -200,8 +196,6 @@ const styles = StyleSheet.create({
   },
   trendingTextContainer: {
     flex: 1,
-    // marginRight: 12,
-    // alignItems: "center",
     padding: 16,
   },
   trendingText: {
@@ -209,6 +203,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     color: "#ffffff",
-    // marginTop: 8,
   },
 });

@@ -7,15 +7,8 @@ import {
   ScrollView,
   ActivityIndicator,
   Pressable,
-  Vibration,
 } from "react-native";
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-  useContext,
-} from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import Carousel from "react-native-reanimated-carousel";
 import YoutubePlayer from "react-native-youtube-iframe";
 import ScrollIndicator from "../components/ScrollIndicator";
@@ -27,7 +20,6 @@ import { GameDataContext } from "../uitils/GameDataContext";
 const windowWidth = Dimensions.get("window").width;
 
 export default function Detail() {
-  // const token = useContext(TokenContext)
   const { libraryList, setLibraryList } = useContext(GameDataContext);
   const navigation = useNavigation();
 
@@ -83,9 +75,12 @@ export default function Detail() {
       setScreenLoading(true);
 
       try {
-        const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/detail`, {
-          gameID: IGDB_id,
-        });
+        const response = await axios.post(
+          `https://gamespedia.vercel.app/detail`,
+          {
+            gameID: IGDB_id,
+          }
+        );
 
         setGameData(response.data);
         const display = createDisplayItemsArray(response.data);
@@ -182,7 +177,6 @@ export default function Detail() {
                       style={{
                         width: "100%",
                         height: "100%",
-                        // borderRadius: 6,
                         overflow: "hidden",
                         alignItems: "center",
                         justifyContent: "center",
