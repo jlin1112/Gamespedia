@@ -8,7 +8,6 @@ import Detail from "./screens/Detail";
 import Main from "./screens/Main";
 import Search from "./screens/Search";
 import List from "./screens/List";
-import axios from "axios";
 import Splash from "./screens/Splash";
 import Pricing from "./screens/Pricing";
 import Editions from "./screens/Editions";

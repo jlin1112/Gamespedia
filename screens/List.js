@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Text,
   FlatList,
-  Pressable,
+  StatusBar,
   ActivityIndicator,
   SafeAreaView,
   Platform,

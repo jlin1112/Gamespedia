@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
   trendingTextContainer: {
     flex: 1,
     marginRight: 12,
-    alignItems: "ceneter",
+    alignItems:'flex-start'
+    // alignItems: "center",
   },
   trendingText: {
     textAlign: "center",

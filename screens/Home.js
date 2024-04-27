@@ -8,6 +8,7 @@ import {
   Dimensions,
   ActivityIndicator,
   Animated,
+  Platform,
 } from "react-native";
 import Categories from "../components/Categories";
 import GameCarousel from "../components/GameCarousel";
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#232526",
+    paddingTop:Platform.OS === 'android'? 16 :0
   },
   wrapper: {
     flex: 1,

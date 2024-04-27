@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   SafeAreaView,
   Platform,
+  StatusBar
 } from "react-native";
 import axios from "axios";
 import Card from "../components/Card";

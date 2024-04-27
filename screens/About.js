@@ -5,6 +5,7 @@ import {
   Platform,
   View,
   ScrollView,
+  StatusBar
 } from "react-native";
 
 export default function About() {
