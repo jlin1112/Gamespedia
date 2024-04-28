@@ -7,7 +7,7 @@ import ScrollIndicator from "./ScrollIndicator";
 
 export default function GameCarousel({ gameData, navigation }) {
   const width = Dimensions.get("window").width - 16;
-  const height = Dimensions.get("window").height * 0.15;
+  const height =  Dimensions.get('window').height < 800?  Dimensions.get('window').height* 0.2 : Dimensions.get("window").height * 0.15;
 
   const [activeCard, setActiveCard] = useState(0);
 
@@ -40,7 +40,7 @@ export default function GameCarousel({ gameData, navigation }) {
 const styles = StyleSheet.create({
   card: {
     borderRadius: 12,
-    height: Dimensions.get("window").height * 0.15,
+    height: Dimensions.get('window').height < 800?  Dimensions.get('window').height * 0.2 : Dimensions.get("window").height * 0.15,
     marginTop: 8,
   },
   text: {

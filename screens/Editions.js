@@ -6,6 +6,7 @@ import {
   ScrollView,
   Pressable,
   ActivityIndicator,
+  Dimensions
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from "axios";
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 16 : 20,
     fontWeight: "700",
   },
   card: {
@@ -161,7 +162,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: Dimensions.get('window').height < 800? 12 : 16,
     fontWeight: "500",
   },
 });

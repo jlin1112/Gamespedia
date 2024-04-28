@@ -5,6 +5,7 @@ import {
   Pressable,
   ActivityIndicator,
   FlatList,
+  Dimensions
 } from "react-native";
 import { useRef } from "react";
 
@@ -29,13 +30,13 @@ export default function Recommend({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: 8,
+          marginBottom: Dimensions.get('window').height < 800? 4 : 8,
         }}
       >
         <Text style={styles.carouselTitle}>Recommend</Text>
 
         <Pressable onPress={loadNextGroup} disabled={loadingPopular}>
-          <Text style={{ color: "#ffffff", fontSize: 12, fontWeight: "500" }}>
+          <Text style={{ color: "#ffffff", fontSize: Dimensions.get('window').height < 800? 6 : 12, fontWeight: "500" }}>
             More
           </Text>
         </Pressable>
@@ -91,7 +92,7 @@ export default function Recommend({
 const styles = StyleSheet.create({
   carouselTitle: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "700",
   },
   text: {

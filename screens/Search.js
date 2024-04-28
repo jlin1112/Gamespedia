@@ -7,18 +7,18 @@ import {
   StatusBar,
   Pressable,
   Animated,
+  Dimensions,
 } from "react-native";
-import {  useRef } from "react";
+import { useRef } from "react";
 import SearchBar from "../components/SearchBar";
 import SearchResults from "../components/SearchResults";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import shuffleArray from "../uitils/shuffleArray";
 import Recommend from "../components/Recommend";
+import SearchBar_Android from "../components/SearchBar_Android";
 
 export default function Search() {
-  
-
   //whole data and data to be displayed
   const [data, setData] = useState(null);
   const [displayData, setDisplayData] = useState(null);
@@ -58,7 +58,7 @@ export default function Search() {
     setSearching(false);
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 200, 
+      duration: 200,
       useNativeDriver: true,
     }).start();
   };
@@ -95,15 +95,17 @@ export default function Search() {
 
   return (
     <SafeAreaView style={styles.container}>
+     
       <View style={styles.searchbar}>
+      
         <Text style={styles.text}>Search</Text>
-        <SearchBar
-          fadeIn={fadeIn}
-          fadeOut={fadeOut}
-          setSearchResult={setSearchResult}
-          setSearchingResult={setSearchingResult}
-          setSearchError={setSearchError}
-        />
+           <SearchBar
+            fadeIn={fadeIn}
+            fadeOut={fadeOut}
+            setSearchResult={setSearchResult}
+            setSearchingResult={setSearchingResult}
+            setSearchError={setSearchError}
+          />
       </View>
       <View style={styles.bottomArea}>
         <Animated.View
@@ -201,7 +203,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#232526",
   },
   searchbar: {
-    height: "15%",
+    // height: "15%",
+    height: Dimensions.get('window').height < 800? 70 : 100,
     paddingHorizontal: 8,
   },
   bottomArea: {
@@ -215,7 +218,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height < 800 ? 12 : 20,
     fontWeight: "700",
   },
   background: {

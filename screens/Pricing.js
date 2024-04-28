@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator,Dimensions } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import axios from "axios";
 
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize:  Dimensions.get('window').height < 800? 16 :  20,
     fontWeight: "700",
   },
   priceTag: {
@@ -193,12 +193,12 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "700",
   },
   text: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: Dimensions.get('window').height < 800? 10 : 16,
     fontWeight: "500",
   },
   pricing: {
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   discountText: {
     color: "#232526",
-    fontSize: 20,
+    fontSize:Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "500",
   },
   price: {
@@ -226,13 +226,13 @@ const styles = StyleSheet.create({
   },
   retailPrice: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize:Dimensions.get('window').height < 800? 10 : 16,
     fontWeight: "500",
     textDecorationLine: "line-through",
   },
   discountedPrice: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "500",
   },
 });

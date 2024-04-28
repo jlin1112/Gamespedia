@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -18,9 +18,12 @@ import Trending from "./screens/Trending";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [appLoading, setAppLoading] = useState(true);
+  const [appLoading, setAppLoading] = useState(false);
 
   const [libraryList, setLibraryList] = useState([]);
+
+  const deviceHeight = Dimensions.get('window').height
+  
 
   useEffect(() => {
     const getLibraryList = async () => {
@@ -40,7 +43,7 @@ export default function App() {
       },2000)
     };
 
-    getLibraryList();
+    // getLibraryList();
   }, []);
 
   if(appLoading){
@@ -52,7 +55,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <GameDataContext.Provider value={{ libraryList, setLibraryList }}>
+      <GameDataContext.Provider value={{ libraryList, setLibraryList, deviceHeight }}>
         <NavigationContainer style={styles.container}>
           <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
             <Stack.Screen

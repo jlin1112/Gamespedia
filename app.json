@@ -2,9 +2,9 @@
   "expo": {
     "name": "Gamespedia",
     "slug": "Gamespedia",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icons/Gamepedia.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -16,19 +16,24 @@
     ],
     "ios": {
       "supportsTablet": true
-     
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/Gamepedia.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jlin96.Gamespedia"
     },
     "web": {
       "favicon": "./assets/icons/Gamepedia.png"
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ab3c5e2e-cf80-44bb-8112-51400742222b"
+      }
+    }
   }
 }

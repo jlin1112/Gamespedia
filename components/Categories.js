@@ -5,8 +5,11 @@ import {
   Pressable,
   ScrollView,
   Image,
+  Dimensions
 } from "react-native";
+import { useContext } from "react";
 import getImageSource from "../uitils/getImageSource";
+import { GameDataContext } from "../uitils/GameDataContext";
 
 const genres = [
   [
@@ -39,6 +42,8 @@ export default function Categories({ navigation }) {
   const handlePress = (genre) => {
     navigation.navigate("List", { genre: genre });
   };
+
+  const {deviceHeight} = useContext(GameDataContext)
 
   return (
     <>
@@ -84,9 +89,9 @@ export default function Categories({ navigation }) {
 const styles = StyleSheet.create({
   text: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12:  20,
     fontWeight: "700",
-    marginTop: 16,
+    marginTop:  Dimensions.get('window').height < 800? 12 : 16,
   },
   ScrollView: {
     marginTop: 16,
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
   genre: {
     textAlign: "center",
     paddingVertical: 10,
-    fontSize: 16,
+    fontSize:  Dimensions.get('window').height < 800? 10 :  16,
     color: "#ffffff",
   },
   button: {

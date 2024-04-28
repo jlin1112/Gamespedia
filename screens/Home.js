@@ -9,10 +9,11 @@ import {
   ActivityIndicator,
   Animated,
   Platform,
+  StatusBar,
 } from "react-native";
 import Categories from "../components/Categories";
 import GameCarousel from "../components/GameCarousel";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import axios from "axios";
 
 export default function Home({ navigation }) {
@@ -69,7 +70,7 @@ export default function Home({ navigation }) {
                 style={styles.icon}
               ></Image>
             </View>
-            <View style={{ gap: 8 }}>
+            <View style={{ gap:  Dimensions.get('window').height < 800?  4 : 8 }}>
               <Text style={styles.text}>Welcome,</Text>
               <Text style={styles.text}>To your next adventure</Text>
             </View>
@@ -90,7 +91,7 @@ export default function Home({ navigation }) {
               <Text
                 style={{
                   color: "#ffffff",
-                  fontSize: 12,
+                  fontSize: Dimensions.get("window").height < 800 ? 6 : 12,
                   fontWeight: "500",
                   marginRight: 8,
                 }}
@@ -142,7 +143,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#232526",
-    paddingTop:Platform.OS === 'android'? 16 :0
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   wrapper: {
     flex: 1,
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height < 800 ? 12 : 20,
     fontWeight: "700",
   },
   background: {
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
   },
   carouselTitle: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height < 800 ? 12 : 20,
     fontWeight: "700",
 
     // marginBottom: 8,

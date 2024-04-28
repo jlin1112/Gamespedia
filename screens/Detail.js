@@ -255,7 +255,7 @@ export default function Detail() {
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
-              marginBottom: 16,
+              marginBottom: Dimensions.get('window').height < 800? 10 : 16,
             }}
           >
             <Text style={styles.text}>
@@ -271,7 +271,7 @@ export default function Detail() {
 
           <View
             style={{
-              marginBottom: 16,
+              marginBottom: Dimensions.get('window').height < 800? 12 : 16,
               flexDirection: "row",
               flexWrap: "wrap",
               gap: 8,
@@ -337,7 +337,7 @@ export default function Detail() {
               <Text style={[styles.text, { marginBottom: 8 }]}>Summary:</Text>
               <View>
                 {gameData[0].summary && (
-                  <Text style={[styles.subtext, { lineHeight: 22 }]}>
+                  <Text style={[styles.subtext, { lineHeight:Dimensions.get('window').height < 800? 14: 22 }]}>
                     {gameData[0].summary}
                   </Text>
                 )}
@@ -411,18 +411,18 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#ffffff",
-    fontSize: 24,
+    fontSize: Dimensions.get('window').height < 800? 16: 24,
     fontWeight: "700",
-    marginBottom: 16,
+    marginBottom: Dimensions.get('window').height < 800? 5 : 16,
   },
   text: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: Dimensions.get('window').height < 800? 12 : 16,
     fontWeight: "700",
   },
   subtext: {
     color: "#ffffff",
-    fontSize: 14,
+    fontSize: Dimensions.get('window').height < 800? 10 : 14,
     fontWeight: "500",
   },
   label: {
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 16,
+    marginHorizontal: Dimensions.get('window').height < 800?  10 : 16,
     marginBottom: 16,
     alignItems: "center",
     justifyContent: "flex-end",
@@ -469,9 +469,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#232526",
     padding: 8,
+    fontSize: Dimensions.get('window').height < 800? 10 : 12,
   },
   buttonText2: {
     color: "#ffffff",
     padding: 8,
+    fontSize: Dimensions.get('window').height < 800? 10 : 12,
   },
 });

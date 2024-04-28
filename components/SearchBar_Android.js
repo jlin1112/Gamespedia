@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import axios from "axios";
 
-const SearchBar = ({
+const SearchBar_Android = ({
   fadeIn,
   fadeOut,
   setSearchResult,
@@ -80,42 +80,36 @@ const SearchBar = ({
   };
 
   return (
+    <>
+    
+ 
     <View style={styles.container}>
       <View style={styles.animateContainer}>
         
-        <Animated.View
-          style={[
-            styles.searchBar,
-            {
-              width: searchWidth.interpolate({
-                inputRange: [0, 1],
-                outputRange: ["75%", "100%"],
-              }),
-            },
-          ]}
-        >
-          <TextInput
+      <TextInput
             style={[styles.input]}
             placeholder="Search for Games"
             placeholderTextColor={"#232526"}
-            onChangeText={setSearchText}
-            value={searchText}
-            onSubmitEditing={handleSearch}
-            spellCheck={false}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            blurOnSubmit={true}
-            autoCapitalize="words"
-            autoFocus={true}
+            // onChangeText={setSearchText}
+            // value={searchText}
+            // onSubmitEditing={handleSearch}
+            // spellCheck={false}
+            // onFocus={handleFocus}
+            // onBlur={handleBlur}
+            // blurOnSubmit={true}
+            // autoCapitalize="words"
+            // autoFocus={true}
+           
           />
-        </Animated.View>
-        <Animated.View style={[styles.cancelButton]}>
+      
+        {/* <Animated.View style={[styles.cancelButton]}>
           <Pressable onPress={expandSearch}>
             <Text style={styles.text}>Cancel</Text>
           </Pressable>
-        </Animated.View>
+        </Animated.View> */}
       </View>
     </View>
+    </>
   );
 };
 
@@ -165,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchBar;
+export default SearchBar_Android;

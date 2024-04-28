@@ -5,12 +5,17 @@ import {
   Platform,
   View,
   ScrollView,
-  StatusBar
+  StatusBar,
+  TextInput,
+  Dimensions
 } from "react-native";
 
 export default function About() {
   return (
     <SafeAreaView style={styles.container}>
+
+
+
       <ScrollView>
         <View style={{ paddingHorizontal: 8 }}>
           <Text style={[styles.title, { marginBottom: 8 }]}>Info</Text>
@@ -114,19 +119,19 @@ const styles = StyleSheet.create({
 
   title: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "700",
   },
   text: {
     color: "#ffffff",
-    fontSize: 18,
+    fontSize:Dimensions.get('window').height < 800? 11: 18,
     fontWeight: "600",
   },
 
   subText: {
     color: "#ffffff",
-    fontSize: 16,
+    fontSize: Dimensions.get('window').height < 800? 10 : 16,
     fontWeight: "300",
-    lineHeight: 24,
+    lineHeight: Dimensions.get('window').height < 800? 15: 24,
   },
 });

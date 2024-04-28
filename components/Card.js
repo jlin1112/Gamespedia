@@ -39,7 +39,7 @@ const Card = React.memo(({ gameData, navigation }) => {
         >
           {gameData.name || ""}
         </Text>
-        <Text style={styles.trendingText}>
+        <Text style={  [styles.trendingText,{marginTop:4}] }>
           {gameData.total_rating && gameData.total_rating.toFixed(1) + "/100"}
         </Text>
 
@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
   trendingCard: {
     backgroundColor: "rgba(53, 63, 84, .3)",
     flexDirection: "row",
-    height: Dimensions.get("window").height * 0.15,
-    gap: 16,
+    height:   Dimensions.get('window').height < 800?  Dimensions.get('window').height*0.2 :  Dimensions.get("window").height * 0.15,
+    gap:  Dimensions.get('window').height < 800? 10 : 16,
     borderRadius: 12,
     marginBottom: 8,
   },
   trendingImage: {
-    width: Dimensions.get("window").height * 0.13,
+    width:  Dimensions.get('window').height < 800?  Dimensions.get('window').height*0.18 :  Dimensions.get("window").height * 0.13,
     height: "100%",
     resizeMode: "stretch",
     borderRadius: 6,
@@ -88,12 +88,12 @@ const styles = StyleSheet.create({
   trendingTextContainer: {
     flex: 1,
     marginRight: 12,
-    alignItems:'flex-start'
+    alignItems:'flex-start',
     // alignItems: "center",
   },
   trendingText: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize:   Dimensions.get('window').height < 800? 10 : 16,
     fontWeight: "700",
     color: "#ffffff",
     marginTop: 8,
@@ -106,13 +106,14 @@ const styles = StyleSheet.create({
   },
   themesSubText: {
     textAlign: "center",
-    fontSize: 12,
+    fontSize:  Dimensions.get('window').height < 800? 8:  12,
     fontWeight: "700",
     color: "#ffffff",
-    marginTop: 8,
+    marginTop:  Dimensions.get('window').height < 800? 4 : 8,
     borderColor: "#ffffff",
     borderWidth: 1,
     borderRadius: 6,
     paddingHorizontal: 6,
+
   },
 });

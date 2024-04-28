@@ -118,7 +118,7 @@ export default function Library({ navigation }) {
       </Modal>
 
       <View style={{ paddingHorizontal: 8 }}>
-        <Text style={[styles.text, { marginBottom: 16 }]}>Collections</Text>
+        <Text style={[styles.text, { marginBottom: Dimensions.get('window').height < 800? 5 : 16 }]}>Collections</Text>
 
         <View>
           {libraryList.length > 0 ? (
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
 
   text: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: Dimensions.get('window').height < 800? 12 : 20,
     fontWeight: "700",
   },
   trendingCard: {
@@ -197,11 +197,11 @@ const styles = StyleSheet.create({
   },
   trendingTextContainer: {
     flex: 1,
-    padding: 16,
+    padding:Dimensions.get('window').height < 800? 10 :  16,
   },
   trendingText: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: Dimensions.get('window').height < 800? 12 : 16,
     fontWeight: "700",
     color: "#ffffff",
   },
