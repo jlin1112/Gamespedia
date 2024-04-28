@@ -106,7 +106,6 @@ const SearchBar = ({
             onBlur={handleBlur}
             blurOnSubmit={true}
             autoCapitalize="words"
-            autoFocus={true}
             inputMode='search'
           />
         </Animated.View>
