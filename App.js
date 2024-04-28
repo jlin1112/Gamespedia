@@ -18,7 +18,7 @@ import Trending from "./screens/Trending";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [appLoading, setAppLoading] = useState(false);
+  const [appLoading, setAppLoading] = useState(true);
 
   const [libraryList, setLibraryList] = useState([]);
 
@@ -43,7 +43,7 @@ export default function App() {
       },2000)
     };
 
-    // getLibraryList();
+    getLibraryList();
   }, []);
 
   if(appLoading){

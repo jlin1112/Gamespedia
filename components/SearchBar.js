@@ -107,6 +107,7 @@ const SearchBar = ({
             blurOnSubmit={true}
             autoCapitalize="words"
             autoFocus={true}
+            inputMode='search'
           />
         </Animated.View>
         <Animated.View style={[styles.cancelButton]}>
