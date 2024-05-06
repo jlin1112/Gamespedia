@@ -32,7 +32,7 @@ const SearchBar = ({
       return;
     }
     try {
-      const response = await axios.post(`https://gamespedia.vercel.app/search`, {
+      const response = await axios.post(process.env.EXPO_PUBLIC_API_URL, {
         searchItem: searchText,
       });
 

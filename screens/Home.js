@@ -37,7 +37,7 @@ export default function Home({ navigation }) {
 
     try {
       const response = await axios.get(
-        `https://gamespedia.vercel.app/trending`
+        process.env.EXPO_PUBLIC_API_URL
       );
       setTrendingData(response.data);
       setTimeout(() => {

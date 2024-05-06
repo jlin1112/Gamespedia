@@ -24,7 +24,7 @@ export default function Trending() {
   const getTrending = async () => {
     try {
       const response = await axios.get(
-        `https://gamespedia.vercel.app/trendingList`
+        process.env.EXPO_PUBLIC_API_URL
       );
 
       setGameData(response.data);

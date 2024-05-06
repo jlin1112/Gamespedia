@@ -34,7 +34,7 @@ export default function List() {
     setSearching(true);
 
     try {
-      const response = await axios.post(`https://gamespedia.vercel.app/genre`, {
+      const response = await axios.post( process.env.EXPO_PUBLIC_API_URL, {
         genre: genre.id,
         offset: 0,
         sortValue,

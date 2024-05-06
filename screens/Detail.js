@@ -76,7 +76,7 @@ export default function Detail() {
 
       try {
         const response = await axios.post(
-          `https://gamespedia.vercel.app/detail`,
+          process.env.EXPO_PUBLIC_API_URL,
           {
             gameID: IGDB_id,
           }

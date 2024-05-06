@@ -25,7 +25,7 @@ export default function Editions() {
 
       try {
         const response = await axios.post(
-          `https://gamespedia.vercel.app/edition`,
+          process.env.EXPO_PUBLIC_API_URL,
           {
             gameName,
           }

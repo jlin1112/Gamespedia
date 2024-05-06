@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import shuffleArray from "../uitils/shuffleArray";
 import Recommend from "../components/Recommend";
-import SearchBar_Android from "../components/SearchBar_Android";
+
 
 export default function Search() {
   //whole data and data to be displayed
@@ -77,7 +77,7 @@ export default function Search() {
     setLoadingPopularError(false);
     setLoadingPopular(true);
     try {
-      const response = await axios.get(`https://gamespedia.vercel.app/popular`);
+      const response = await axios.get( process.env.EXPO_PUBLIC_API_URL);
       const popularGameData = response.data;
       const shuffledData = shuffleArray(popularGameData);
       setData(shuffledData);
