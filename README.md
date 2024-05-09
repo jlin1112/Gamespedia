@@ -2,7 +2,7 @@
 
 <h2>Description</h2>
 <p>
-Gamespedia is a demo project built with React Native and Expo. It provides users with an opportunity to explore various video games, offering details of games such as pricing, screenshots, summaries, etc. Gamespedia aims to demonstrate how React Native and Expo can be utilized to create engaging mobile applications.
+Gamespedia is a demo project built with React Native and Expo. It provides users with an opportunity to explore various video games, offering details of games such as real-time pricing, screenshots, summaries, etc. Gamespedia aims to demonstrate how React Native and Expo can be utilized to create engaging mobile applications.
 </p>
 
 <div>
@@ -16,20 +16,19 @@ Gamespedia is a demo project built with React Native and Expo. It provides users
 
 
 <p>
-Thank you so much for using this demo app! As the developer behind Gamespedia, I am always looking to improve, so feel free to contact me via email at jiahaolin96@gmail.com if
-you have any feedback, suggestions, questions or just want to say hello. I'd love to hear from you! Happy exploring!
+Thank you so much for being interested in this demo app! As the developer behind Gamespedia, I am always looking to improve, so feel free to contact me via email at jiahaolin96@gmail.com if you have any feedback, suggestions, questions or just want to say hello. I'd love to hear from you! Happy exploring!
 </p>
 
 
 <h3>Important:</h3>
- - <i>Gamespedia</i> is designed for game exploring. It <b>WILL NOT</b> require <b>ANY</b> personal information nor system access.
+ - <i>Gamespedia</i> is designed for game exploring. It <b>WILL NOT</b> require <b>ANY</b> personal information or system access.
 
 
 <div>
 <h2>Demo video</h2>
         <ul>
                 <li>url</li>
-                <li>The demo in video was run an IOS device</li>
+                <li>The demo in video was run on Iphone 13 mini</li>
         </ul>
 </div>
 
@@ -40,7 +39,7 @@ you have any feedback, suggestions, questions or just want to say hello. I'd lov
 <ul>
       <li>  
                 <dl>
-                        <dt>Google Drive: url</dt>
+                        <dt>Google Drive: https://drive.google.com/file/d/19d03-v4Orf6uz98X-5Z3KUksQAIAC3Is/view?usp=drive_link</dt>
                         <dd>- Simply download the .apk file and install on a device or a simulator</dd>
                 </dl>
       </li>  
@@ -56,7 +55,7 @@ you have any feedback, suggestions, questions or just want to say hello. I'd lov
 <ul>
       <li>  
                 <dl>
-                        <dt>Google Drive: url</dt>
+                        <dt>Google Drive: https://drive.google.com/file/d/1qhdUfYNMDMqIwz-oE5dKTwD5E_8jx6C3/view?usp=sharing</dt>
                         <dd>- Simply download the .apk file and install on a device or a simulator</dd>
                 </dl>
       </li>  
