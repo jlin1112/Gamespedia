@@ -3,6 +3,9 @@
 <b>Description</b><br/>
 Gamespedia is a demo project built with React Native and Expo. It provides users with an opportunity to explore various video games, offering details of games such as pricing, screenshots, summaries, etc. Gamespedia aims to demonstrate how React Native and Expo can be utilized to create engaging mobile applications.
 
+![Home Screen](https://github.com/jlin1112/Gamespedia/assets/105515232/9e5efee6-b21e-41f1-851f-c3667b23c8ad){:height="10px" width="20px"}
+
+
 
 Thank you so much for using this demo app! As the developer behind Gamespedia, I am always looking to improve, so feel free to contact me via email at jiahaolin96@gmail.com if
 you have any feedback, suggestions, questions or just want to say hello. I'd love to hear from you! Happy exploring!
