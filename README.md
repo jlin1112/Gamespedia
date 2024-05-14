@@ -20,6 +20,8 @@ Thank you so much for being interested in this demo app! As the developer behind
 </p>
 
 
+
+
 <h3>Important:</h3>
  - <i>Gamespedia</i> is designed for game exploring. It <b>WILL NOT</b> require <b>ANY</b> personal information or system access.
 
@@ -36,6 +38,9 @@ Thank you so much for being interested in this demo app! As the developer behind
 
 <h2>Download and Installiation</h2>
 <h3>Android apk for real devices or simulator download</h3>
+<p>
+                <b>-Your device may prompt you to confirm the installation of the app, as it's not yet published on Google Play. If you prefer not to download and install the app, you're welcome to watch the demo video via the link above!</b>
+</p>
 <ul>
       <li>  
                 <dl>
@@ -46,12 +51,14 @@ Thank you so much for being interested in this demo app! As the developer behind
       <li>  
                 <dl>
                         <dt>Expo Link:  https://expo.dev/accounts/jlin96/projects/Gamespedia/builds/613b2d53-8666-4753-b133-55ee9603b5c1</dt>
-                        <dd>- Instructions</dd>
+                        <dd>- Open the link on your device</dd>
+                        <dd>- Tap the blue 'Download' button</dd>
+                        <dd>- Install</dd>
                 </dl>
       </li>  
 </ul>
       
-<h3>Chinese version:</h3>
+<h3>Chinese version for Android:</h3>
 <ul>
       <li>  
                 <dl>
@@ -62,15 +69,52 @@ Thank you so much for being interested in this demo app! As the developer behind
       <li>  
                 <dl>
                         <dt>Expo Link:  https://expo.dev/accounts/jlin96/projects/gamespedia/builds/a7e5f3c1-cd4e-476e-8ef1-754fee4ae407</dt>
-                        <dd>- Instructions</dd>
+                          <dd>- Open the link on your device</dd>
+                        <dd>- Tap the blue 'Download' button</dd>
+                        <dd>- Install</dd>
                 </dl>
       </li>  
 </ul>
 
-<p>
-                <b>-Your device may prompt you to confirm the installation of the app, as it's not yet published on Google Play. If you prefer not to download and install the app, you're welcome to watch the demo video via the link above!</b>
-</p>
 
 
-<h3>IOS simulator version download link: url</h3>
-  	-Unfortunately, without a Mac and an Apple developer account, I'm unable to build and test a distributable version of the app for real iOS devices, similar to Android. However, the demo video showcases the app running on an iOS device using Expo. Additionally, the iOS simulator version is available for download and installation on a Mac's iOS simulator. Feel free to download and try it out on a Mac's simulator!
+
+<h3>IOS simulator version download: </h3>
+<p><b>  	-Unfortunately, without a Mac and an Apple developer account, I'm unable to build and test a distributable version of the app for real iOS devices, similar to Android. However, the demo video showcases the app running on an iOS device using Expo. Additionally, the iOS simulator version is available for download and installation on a Mac's iOS simulator. Feel free to download and try it out on a Mac's simulator!</b></p>
+
+   <ul>
+      <li>  
+                <dl>
+                        <dt>Google Drive: https://drive.google.com/file/d/188rqN5x6mrSUgxBCV28_sNj4WjA8nBst/view?usp=sharing</dt>
+                        <dd>- Simply download the .apk file and install on a device or a simulator</dd>
+                </dl>
+      </li>  
+      <li>  
+                <dl>
+                        <dt>Expo Link: https://expo.dev/accounts/jlin96/projects/Gamespedia/builds/0c5e2b6b-be85-4d41-afe8-305af6535e76</dt>
+                        <dd>- Open the link on your device</dd>
+                        <dd>- Tap the blue 'Download' button</dd>
+                        <dd>- Install</dd>
+                </dl>
+      </li>  
+</ul>
+
+      
+<h3>Chinese version for IOS:</h3>
+<ul>
+      <li>  
+                <dl>
+                        <dt>Google Drive: https://drive.google.com/file/d/1eEMkJBAmWEUbQaiNv4eVMr8yKlDoR7wi/view?usp=sharing</dt>
+                        <dd>- Simply download the .apk file and install on a device or a simulator</dd>
+                </dl>
+      </li>  
+      <li>  
+                <dl>
+                        <dt>Expo Link:  https://expo.dev/accounts/jlin96/projects/gamespedia/builds/46101fbd-a8c6-4581-b508-6a0c447de35d</dt>
+                          <dd>- Open the link on your device</dd>
+                        <dd>- Tap the blue 'Download' button</dd>
+                        <dd>- Install</dd>
+                </dl>
+      </li>  
+</ul>
+   
