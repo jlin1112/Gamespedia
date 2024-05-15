@@ -29,7 +29,7 @@ Thank you so much for being interested in this demo app! As the developer behind
 <div>
 <h2>Demo video</h2>
         <ul>
-                <li>url</li>
+                <li>https://youtu.be/a9U96-sbB_w</li>
                 <li>The demo in video was run on Iphone 13 mini</li>
         </ul>
 </div>
