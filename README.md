@@ -31,7 +31,7 @@ Thank you so much for being interested in this demo app! As the developer behind
 <h2>Demo video</h2>
         <ul>
                 <li>https://youtu.be/a9U96-sbB_w</li>
-                <li>The demo in video was run on Iphone 13 mini</li>
+                <li>The demo in video was ran on Iphone 13 mini</li>
         </ul>
 </div>
 
