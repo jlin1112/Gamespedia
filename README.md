@@ -3,6 +3,7 @@
 <h2>Description</h2>
 <p>
 Gamespedia is a demo project built with React Native and Expo. It provides users with an opportunity to explore various video games, offering details of games such as real-time pricing, screenshots, summaries, etc. Gamespedia aims to demonstrate how React Native and Expo can be utilized to create engaging mobile applications.
+<br><b>Major Technologies Used:</b> React Native, Expo, Express, MongoDB, Node.js, Vercel
 </p>
 
 <div>
